@@ -39,7 +39,7 @@ const RegisterScreen = ({ navigation }) => {
     .then((response) => response.json())
     .then((responseJson) => {
      /*console.log(responseJson.message);*/
-      if(responseJson.status === "success")
+      if(responseJson.success === 1)
       {
         console.log(responseJson.message);
         navigation.navigate('LoginScreen')

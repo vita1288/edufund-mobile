@@ -23,7 +23,7 @@ const LoginScreen = ({ navigation }) => {
     .then((response) => response.json())
     .then((responseJson) => {
      /*console.log(responseJson.message);*/
-      if(responseJson.status === "true")
+      if(responseJson.status === true)
       {
         navigation.navigate('Dashboard');
       }
