@@ -15,17 +15,6 @@ export const passwordValidator = password => {
   return '';
 };
 
-export const firstnameValidator = firstname => {
-  if (!firstname || firstname.length <= 0) return 'First Name cannot be empty.';
-
-  return '';
-};
-
-export const lastnameValidator = lastname => {
-  if (!lastname || lastname.length <= 0) return 'Last Name cannot be empty.';
-
-  return '';
-};
 
 export const phonenumberValidator = phonenumber => {
   if (!phonenumber || phonenumber.length <= 0) return 'Phone Number cannot be empty.';

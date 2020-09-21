@@ -10,8 +10,6 @@ import { theme } from '../core/theme';
 import {
   emailValidator,
   passwordValidator,
-  firstnameValidator,
-  lastnameValidator,
   phonenumberValidator
 } from '../core/utils';
 
@@ -20,16 +18,47 @@ const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState({ value: '', error: '' });
   const [password, setPassword] = useState({ value: '', error: '' });
 
+  function SignUpFunction()
+  {
+    fetch("http://192.168.0.18/edufund-api/Api/signup.php",{
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+ 
+        email : email.value,
+ 
+        password : password.value,
+
+        phonenumber : phonenumber.value
+ 
+      })
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+     /*console.log(responseJson.message);*/
+      if(responseJson.status === "success")
+      {
+        console.log(responseJson.message);
+      }
+      else{
+        alert(responseJson.message)
+      }
+   
+       }).catch((error) => {
+         console.error(error);
+       });
+    
+   }
+
   const _onSignUpPressed = () => {
-    const firstnameError = firstnameValidator(firstname.value);
-    const lastnameError = lastnameValidator(lastname.value);
     const phonenumberError = phonenumberValidator(phonenumber.value);
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
 
-    if (emailError || passwordError || firstnameError || lastnameError || phonenumberError) {
-      setFirstName({ ...firstname, error: firstnameError });
-      setLastName({ ...lastname, error: lastnameError });
+    if (emailError || passwordError || phonenumberError) {
       setPhoneNumber({ ...phonenumber, error: phonenumberError });
       setEmail({ ...email, error: emailError });
       setPassword({ ...password, error: passwordError });
@@ -79,7 +108,7 @@ const RegisterScreen = ({ navigation }) => {
       />
 
       
-      <Button mode="contained" onPress={_onSignUpPressed} style={styles.button}>
+      <Button mode="contained" onPress={SignUpFunction} style={styles.button}>
         Sign Up
       </Button>
         </View>
