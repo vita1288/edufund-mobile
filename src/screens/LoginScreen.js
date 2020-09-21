@@ -41,8 +41,6 @@ const LoginScreen = ({ navigation }) => {
   const _onLoginPressed = () => {
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
-    
-
     if (emailError || passwordError) {
       setEmail({ ...email, error: emailError });
       setPassword({ ...password, error: passwordError });
@@ -90,7 +88,7 @@ const LoginScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
-      <Button mode="contained" onPress={UserLoginFunction}>
+      <Button mode="contained" onPress={UserLoginFunction,_onLoginPressed}>
         Login
       </Button>
 

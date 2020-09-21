@@ -17,7 +17,7 @@ const RegisterScreen = ({ navigation }) => {
   const [phonenumber, setPhoneNumber] = useState({ value: '', error: '' });
   const [email, setEmail] = useState({ value: '', error: '' });
   const [password, setPassword] = useState({ value: '', error: '' });
-
+  
   function SignUpFunction()
   {
     fetch("http://192.168.0.18/edufund-api/Api/signup.php",{
@@ -54,6 +54,7 @@ const RegisterScreen = ({ navigation }) => {
    }
 
   const _onSignUpPressed = () => {
+    
     const phonenumberError = phonenumberValidator(phonenumber.value);
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
@@ -108,7 +109,7 @@ const RegisterScreen = ({ navigation }) => {
       />
 
       
-      <Button mode="contained" onPress={SignUpFunction} style={styles.button}>
+      <Button mode="contained" onPress={SignUpFunction,_onSignUpPressed} style={styles.button}>
         Sign Up
       </Button>
         </View>
