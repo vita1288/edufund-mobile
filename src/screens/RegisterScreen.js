@@ -14,9 +14,9 @@ import {
 } from '../core/utils';
 
 const RegisterScreen = ({ navigation }) => {
-  const [phonenumber, setPhoneNumber] = useState({ value: '', error: '' });
-  const [email, setEmail] = useState({ value: '', error: '' });
-  const [password, setPassword] = useState({ value: '', error: '' });
+  const [phonenumber, setPhoneNumber] = useState({ value: '' });
+  const [email, setEmail] = useState({ value: ''});
+  const [password, setPassword] = useState({ value: ''});
   
   function SignUpFunction()
   {
@@ -42,6 +42,7 @@ const RegisterScreen = ({ navigation }) => {
       if(responseJson.status === "success")
       {
         console.log(responseJson.message);
+        navigation.navigate('LoginScreen')
       }
       else{
         alert(responseJson.message)
@@ -80,7 +81,7 @@ const RegisterScreen = ({ navigation }) => {
         label="Email"
         returnKeyType="next"
         value={email.value}
-        onChangeText={text => setEmail({ value: text, error: '' })}
+        onChangeText={text => setEmail({ value: text})}
         error={!!email.error}
         errorText={email.error}
         autoCapitalize="none"
@@ -93,7 +94,7 @@ const RegisterScreen = ({ navigation }) => {
         label="Password"
         returnKeyType="done"
         value={password.value}
-        onChangeText={text => setPassword({ value: text, error: '' })}
+        onChangeText={text => setPassword({ value: text})}
         error={!!password.error}
         errorText={password.error}
         secureTextEntry
@@ -103,13 +104,13 @@ const RegisterScreen = ({ navigation }) => {
         label="Phone Number"
         returnKeyType="next"
         value={phonenumber.value}
-        onChangeText={text => setPhoneNumber({ value: text, error: '' })}
+        onChangeText={text => setPhoneNumber({ value: text })}
         error={!!phonenumber.error}
         errorText={phonenumber.error}
       />
 
       
-      <Button mode="contained" onPress={SignUpFunction,_onSignUpPressed} style={styles.button}>
+      <Button mode="contained" onPress={SignUpFunction} style={styles.button}>
         Sign Up
       </Button>
         </View>

@@ -11,8 +11,8 @@ import { emailValidator, passwordValidator } from '../core/utils';
 
 
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState({value: '', error: ''});
-  const [password, setPassword] = useState({value: '', error: ''});
+  const [email, setEmail] = useState({value: ''});
+  const [password, setPassword] = useState({value: ''});
   
 
   function UserLoginFunction()
@@ -61,7 +61,7 @@ const LoginScreen = ({ navigation }) => {
         label="Email"
         returnKeyType="next"
         value={email.value}
-        onChangeText={email => setEmail({ value: email, error: '' })}
+        onChangeText={email => setEmail({ value: email })}
         error={!!email.error}
         errorText={email.error}
         autoCapitalize="none"
@@ -74,7 +74,7 @@ const LoginScreen = ({ navigation }) => {
         label="Password"
         returnKeyType="done"
         value={password.value}
-        onChangeText={password => setPassword({ value: password, error: '' })}
+        onChangeText={password => setPassword({ value: password})}
         error={!!password.error}
         errorText={password.error}
         secureTextEntry
@@ -88,7 +88,7 @@ const LoginScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
-      <Button mode="contained" onPress={UserLoginFunction,_onLoginPressed}>
+      <Button mode="contained" onPress={UserLoginFunction}>
         Login
       </Button>
 

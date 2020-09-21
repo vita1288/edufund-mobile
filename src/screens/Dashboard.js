@@ -48,10 +48,10 @@ export default function Dashboard() {
   return (
       <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Home" Ionicons='' component={HomeScreen} />
-        <Tab.Screen name="Loan" Ionicons ='' component={LoanScreen} />
-        <Tab.Screen name="History" Ionicons =''component={HistoryScreen} />
-        <Tab.Screen name="Profile" Ionicons ='' component={ProfileScreen} />
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Loan" component={LoanScreen} />
+        <Tab.Screen name="History" component={HistoryScreen} />
+        <Tab.Screen name="Profile"  component={ProfileScreen} />
       </Tab.Navigator>
     </NavigationContainer>
     
