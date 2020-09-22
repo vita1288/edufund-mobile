@@ -73,11 +73,10 @@ const RegisterScreen = ({ navigation }) => {
     <Background>
       <BackButton goBack={() => navigation.navigate('HomeScreen')} />
       <Logo />
-      <ScrollView>
       <Header>Create Account</Header>
         <View>
-       
         <TextInput
+        styles = {styles.TextInputStyle}
         label="Email"
         returnKeyType="next"
         value={email.value}
@@ -91,6 +90,7 @@ const RegisterScreen = ({ navigation }) => {
       />
 
       <TextInput
+      styles = {styles.TextInputStyle}
         label="Password"
         returnKeyType="done"
         value={password.value}
@@ -122,17 +122,21 @@ const RegisterScreen = ({ navigation }) => {
           <Text style={styles.link}>Login</Text>
         </TouchableOpacity>
       </View>
-      </ScrollView>
      </Background>
   );
 };
 
 const styles = StyleSheet.create({
+  container : {
+    flex : 1,
+    justifyContent : 'flex-start',
+    alignContent : "center",
+  },
   label: {
     color: theme.colors.secondary,
   },
   button: {
-    marginTop: 20,
+    marginTop: 24,
   },
   row: {
     flexDirection: 'row',

@@ -1,5 +1,5 @@
 import React, { memo, useState } from 'react';
-import { Alert,TouchableOpacity, StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
@@ -8,11 +8,12 @@ import TextInput from '../components/TextInput';
 import BackButton from '../components/BackButton';
 import { theme } from '../core/theme';
 import { emailValidator, passwordValidator } from '../core/utils';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState({value: ''});
-  const [password, setPassword] = useState({value: ''});
+  const [email, setEmail] = useState({value: '', error:''});
+  const [password, setPassword] = useState({value: '',error: ''});
   
 
   function UserLoginFunction()
@@ -52,9 +53,8 @@ const LoginScreen = ({ navigation }) => {
   return (
     <Background>
       <BackButton goBack={() => navigation.navigate('HomeScreen')} />
-
+ 
       <Logo />
-
       <Header>Login Form</Header>
 
       <TextInput

@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     fontSize: 26,
     color: theme.colors.primary,
     fontWeight: 'bold',
-    paddingVertical: 14,
+    paddingVertical: 20,
   },
 });
 

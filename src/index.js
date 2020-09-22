@@ -9,7 +9,6 @@ import {
   ForgotPasswordScreen,
   VerificationCodeScreen,
   Dashboard,
-  Profile,
 } from './screens';
 
 const Router = createStackNavigator(
@@ -21,7 +20,6 @@ const Router = createStackNavigator(
     ForgotPasswordScreen,
     VerificationCodeScreen,
     Dashboard,
-    Profile,
   },
   {
     initialRouteName: 'LoadingScreen',
