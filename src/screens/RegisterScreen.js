@@ -1,5 +1,5 @@
 import React, { memo, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
@@ -74,13 +74,12 @@ const RegisterScreen = ({ navigation }) => {
       <BackButton goBack={() => navigation.navigate('HomeScreen')} />
       <Logo />
       <Header>Create Account</Header>
-        <View>
         <TextInput
         styles = {styles.TextInputStyle}
         label="Email"
         returnKeyType="next"
         value={email.value}
-        onChangeText={text => setEmail({ value: text})}
+        onChangeText={email => setEmail({ value: email})}
         error={!!email.error}
         errorText={email.error}
         autoCapitalize="none"
@@ -94,7 +93,7 @@ const RegisterScreen = ({ navigation }) => {
         label="Password"
         returnKeyType="done"
         value={password.value}
-        onChangeText={text => setPassword({ value: text})}
+        onChangeText={password => setPassword({ value: password})}
         error={!!password.error}
         errorText={password.error}
         secureTextEntry
@@ -104,7 +103,7 @@ const RegisterScreen = ({ navigation }) => {
         label="Phone Number"
         returnKeyType="next"
         value={phonenumber.value}
-        onChangeText={text => setPhoneNumber({ value: text })}
+        onChangeText={phonenumber => setPhoneNumber({ value: phonenumber })}
         error={!!phonenumber.error}
         errorText={phonenumber.error}
       />
@@ -113,15 +112,12 @@ const RegisterScreen = ({ navigation }) => {
       <Button mode="contained" onPress={SignUpFunction} style={styles.button}>
         Sign Up
       </Button>
-        </View>
-     
-
       <View style={styles.row}>
-        <Text style={styles.label}>Already have an account? </Text>
+        <Text style={styles.label}>Already have account? </Text>
         <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
           <Text style={styles.link}>Login</Text>
         </TouchableOpacity>
-      </View>
+        </View>
      </Background>
   );
 };
@@ -140,7 +136,7 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-    marginTop: 4,
+    marginTop: 20,
   },
   link: {
     fontWeight: 'bold',

@@ -20,7 +20,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
       return;
     }
 
-    navigation.navigate('LoginScreen');
+  
   };
 
   return (
