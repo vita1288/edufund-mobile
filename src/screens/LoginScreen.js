@@ -9,15 +9,16 @@ import BackButton from '../components/BackButton';
 import { theme } from '../core/theme';
 import { emailValidator, passwordValidator } from '../core/utils';
 import { ScrollView } from 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
 
 
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState({value: '', error:''});
+  const [email, setEmail] = useState({value: '',error: ''});
   const [password, setPassword] = useState({value: '',error: ''});
   
 
   function UserLoginFunction()
-  {
+  { 
     var api = "http://192.168.0.18/edufund-api/Api/login.php?email=" + email.value + "&password=" + password.value;
     console.log(api);
     return fetch(api)
@@ -26,7 +27,11 @@ const LoginScreen = ({ navigation }) => {
      /*console.log(responseJson.message);*/
       if(responseJson.status === true)
       {
-        navigation.navigate('Dashboard');
+        console.log(email.value);
+        navigation.navigate('Dashboard', {
+          itemId: 86,
+          otherParam: 'anything you want here',
+        });
       }
       else{
         alert(responseJson.message)

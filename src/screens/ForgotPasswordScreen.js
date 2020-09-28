@@ -9,8 +9,41 @@ import TextInput from '../components/TextInput';
 import { theme } from '../core/theme';
 import Button from '../components/Button';
 
+
 const ForgotPasswordScreen = ({ navigation }) => {
   const [email, setEmail] = useState({ value: '', error: '' });
+
+  
+  function ForgotFunction()
+  {
+    fetch("http://192.168.0.18/edufund-api/Api/forgotpassword.php",{
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+ 
+        email : email.value
+ 
+      })
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+     console.log(responseJson.message);
+     if(responseJson.success === 1)
+      {
+        alert(responseJson.message)
+        navigation.navigate('LoginScreen')
+      }
+      else{
+        alert(responseJson.message)
+      }
+   
+       }).catch((error) => {
+         console.error(error);
+       });
+   }
 
   const _onSendPressed = () => {
     const emailError = emailValidator(email.value);
@@ -29,7 +62,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
 
       <Logo />
 
-      <Header>Reset Password</Header>
+      <Header>Forgot Password</Header>
 
       <TextInput
         label="E-mail address"
@@ -44,8 +77,8 @@ const ForgotPasswordScreen = ({ navigation }) => {
         keyboardType="email-address"
       />
 
-      <Button mode="contained" onPress={_onSendPressed} style={styles.button} onPress={() => navigation.navigate('VerificationCodeScreen')}>
-        Send Reset Instruction
+      <Button mode="contained" onPress={ForgotFunction}>
+        Send Forgot Instruction
       </Button>
       
       <TouchableOpacity

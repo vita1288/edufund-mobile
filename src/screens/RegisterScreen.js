@@ -12,12 +12,13 @@ import {
   passwordValidator,
   phonenumberValidator
 } from '../core/utils';
+import axios from "axios";
 
 const RegisterScreen = ({ navigation }) => {
   const [phonenumber, setPhoneNumber] = useState({ value: '' });
   const [email, setEmail] = useState({ value: ''});
   const [password, setPassword] = useState({ value: ''});
-  
+
   function SignUpFunction()
   {
     fetch("http://192.168.0.18/edufund-api/Api/signup.php",{
@@ -28,12 +29,12 @@ const RegisterScreen = ({ navigation }) => {
       },
       body: JSON.stringify({
  
-        email : email.value,
- 
-        password : password.value,
+      email : email.value,
 
-        phonenumber : phonenumber.value
- 
+      password: password.value,
+
+      phonenumber : phonenumber.value
+
       })
     })
     .then((response) => response.json())
