@@ -27,7 +27,6 @@ class Simulator extends Component {
 
   fetchdata = async () => {
     let Periodtime =  this.props.navigation.state.params.Periodtime;
-    console.log(Periodtime);
     let interestpermonth = this.props.navigation.state.params.interestpermonth;
     let loanamountrequest = this.props.navigation.state.params.loanamountrequest;
     const response = await fetch('http://192.168.0.18/edufund-api/Api/loansimulation.php?periodtime=' +  Periodtime+ '&interestpermonth=' + interestpermonth + '&loanamountrequest=' + loanamountrequest);
