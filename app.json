@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Edufund",
-    "slug": "Edufund",
+    "name": "EdufundMobileNew",
+    "slug": "EdufundMobileNew",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

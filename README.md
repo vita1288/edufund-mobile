@@ -1,1 +1,0 @@
-# edufund-mobile
