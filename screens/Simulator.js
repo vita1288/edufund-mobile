@@ -2,9 +2,8 @@ import React, { Component } from 'react';
  
 import { StyleSheet, View, Alert, TextInput, Button, Text, Platform, TouchableOpacity, ActivityIndicator } from 'react-native';
  
-import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { FlatList } from 'react-native-gesture-handler';
-import ListView from "deprecated-react-native-listview";
+
 
 class Simulator extends Component {
  
@@ -27,7 +26,6 @@ class Simulator extends Component {
 
   fetchdata = async () => {
     let Periodtime =  this.props.navigation.state.params.Periodtime;
-    console.log(Periodtime);
     let interestpermonth = this.props.navigation.state.params.interestpermonth;
     let loanamountrequest = this.props.navigation.state.params.loanamountrequest;
     const response = await fetch('http://192.168.0.18/edufund-api/Api/loansimulation.php?periodtime=' +  Periodtime+ '&interestpermonth=' + interestpermonth + '&loanamountrequest=' + loanamountrequest);
@@ -44,9 +42,13 @@ class Simulator extends Component {
 
   <FlatList
    data={this.state.data}
-   keyExtractor={(x, i) => i}
+   keyExtractor={(item, i) => i}
    renderItem={({item}) =>
-   <Text>{item.No}, ,{item.interest}, {item.balance}, {item.principal}, {item.installment}</Text>
+   <Text style = {{fontSize:15,backgroundColor:'#1E90FF',margin:15, justifyContent: 'center' ,color:'white', alignItems: 'center',}}>Number : {item.No}
+   , Interest : {item.interest}
+   ,  Balance : {item.balance}
+   , Principal : {item.principal}
+   ,  Installment : {item.Installment}</Text>
    
    }/>
       <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('LoanSimulation')}>
@@ -70,21 +72,13 @@ class Simulator extends Component {
      
       },
      
-      MainContainer_ShowSimulator :{
-        
-        flex:1,
-        paddingTop: (Platform.OS == 'ios') ? 20 : 0,
-        marginLeft: 5,
-        marginRight: 5
-        
-        },
     container: {
       backgroundColor: '#1E90FF',
       height: 700,
     },
     subView: {
       backgroundColor: 'white',
-      height: 430,
+      height: 400,
       marginTop: 240,
       borderTopRightRadius: 40,
       borderTopLeftRadius: 40,
