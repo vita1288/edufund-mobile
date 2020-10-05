@@ -21,6 +21,13 @@ export default class Signup extends Component {
     const { Email }  = this.state ;
     const { Password }  = this.state ;
     const { Phonenumber} = this.state;
+    //Check for email text input
+    if (!Email.trim() && !Password.trim() && !Phonenumber.trim()) {
+      alert('Email cannot be empty');
+      alert('Password cannot be empty');
+      alert('Phone number cannot be empty');
+      return;
+    }
     fetch("http://192.168.0.18/edufund-api/Api/signup.php",{
       method: 'POST',
       headers: {

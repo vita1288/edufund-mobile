@@ -4,6 +4,8 @@ import { StyleSheet, View, Alert, TextInput, Button, Text, Platform, TouchableOp
  
 import { FlatList } from 'react-native-gesture-handler';
 
+import ListView from "deprecated-react-native-listview";
+
 
 class Simulator extends Component {
  
@@ -32,25 +34,31 @@ class Simulator extends Component {
     const responseJson = await response.json();
     this.setState({data : responseJson});
   };
-  render() 
-  {
+
+
+  _renderItem = ({item}) => (
+    <View style = {{backgroundColor:'#1E90FF',margin:15, justifyContent: 'center'}}>
+    <Text style = {{fontSize:20,margin:15, justifyContent: 'center' ,color:'white'}}> Number:    {item.No}</Text>
+    <Text style = {{fontSize:20,margin:15, justifyContent: 'center' ,color:'white'}}> Interest:  {item.interest}</Text>
+    <Text style = {{fontSize:20,margin:15, justifyContent: 'center' ,color:'white'}}> Balance:   {item.balance}</Text>
+    <Text style = {{fontSize:20,margin:15, justifyContent: 'center' ,color:'white'}}> Principal:  {item.principal}</Text>
+    <Text style = {{fontSize:20,margin:15, justifyContent: 'center' ,color:'white'}}> Installment: {item.Installment}</Text>
+    </View>
+  );
+
+  render() {
     return (
       <View style={styles.container}>
         <Text style={styles.headerTxt}>Loan Simulation</Text>
         <View style={styles.subView}>
           <Text style={styles.subTxt}>Simulator</Text>
 
+
   <FlatList
    data={this.state.data}
-   keyExtractor={(item, i) => i}
-   renderItem={({item}) =>
-   <Text style = {{fontSize:15,backgroundColor:'#1E90FF',margin:15, justifyContent: 'center' ,color:'white', alignItems: 'center',}}>Number : {item.No}
-   , Interest : {item.interest}
-   ,  Balance : {item.balance}
-   , Principal : {item.principal}
-   ,  Installment : {item.Installment}</Text>
-   
-   }/>
+   renderItem = {this._renderItem}
+   keyExtractor = {(item, index) => index}
+   />
       <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('LoanSimulation')}>
         <Text style={styles.btnTxt}>Go Back to Loan</Text>
       </TouchableOpacity>
@@ -78,7 +86,7 @@ class Simulator extends Component {
     },
     subView: {
       backgroundColor: 'white',
-      height: 400,
+      height: 399,
       marginTop: 240,
       borderTopRightRadius: 40,
       borderTopLeftRadius: 40,

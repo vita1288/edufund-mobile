@@ -23,6 +23,10 @@ export default class ResetPassword extends Component {
        let UserEmail = this.props.navigation.state.params.UserEmail;
         //const { UserEmail }  = this.state;
         const { Password }  = this.state ;
+        if (!Password.trim()) {
+          alert('Password cannot be empty');
+          return;
+        }
         fetch("http://192.168.0.18/edufund-api/Api/reset_password.php",{
             method: 'POST',
             headers: {

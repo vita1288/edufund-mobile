@@ -19,6 +19,10 @@ import {
     
     ForgotFunction = () => {
     const {UserEmail} = this.state;
+    if (!UserEmail.trim()) {
+      alert('Email cannot be empty');
+      return;
+    }
     fetch("http://192.168.0.18/edufund-api/Api/forgotpassword.php",{
       method: 'POST',
       headers: {

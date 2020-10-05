@@ -32,6 +32,14 @@ import {
       const {Periodtime} = this.state;
       const {interestpermonth} = this.state;
       const {loanamountrequest} = this.state;
+      //Check for Period Time text input
+      if (!Periodtime.trim() && !interestpermonth.trim() && !loanamountrequest.trim()) {
+        alert('Period Time cannot be empty');
+        alert('Interest Per Month cannot be empty');
+        alert('Loan Amount Request cannot be empty');
+        return;
+      }
+      //Checked Successfully
       this.props.navigation.navigate('Simulator', { Periodtime : Periodtime, interestpermonth: interestpermonth, loanamountrequest: loanamountrequest })
     };
 

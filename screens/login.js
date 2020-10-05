@@ -21,6 +21,12 @@ export default class Login extends Component {
   { 
     const {UserEmail} = this.state;
     const {Password} = this.state;
+    //Check for email text input
+    if (!UserEmail.trim() && !Password.trim()) {
+      alert('Email cannot be empty');
+      alert('Password cannot be empty');
+      return;
+    }
     var api = "http://192.168.0.18/edufund-api/Api/login.php?email=" + UserEmail + "&password=" + Password;
     console.log(api);
     return fetch(api)
@@ -81,7 +87,7 @@ const styles = StyleSheet.create({
   },
   subView: {
     backgroundColor: 'white',
-    height: 430,
+    height: 400,
     marginTop: 240,
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
