@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import {  createAppContainer } from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
+import { Ionicons } from 'react-native-vector-icons';
+
 
 class HomeScreen extends Component {
   static navigationOptions = {
@@ -35,6 +37,9 @@ class ProfileScreen extends Component {
       <View style={styles.container}>
       <Text style={styles.headerTxt}>Profile Screen  </Text>
       <View style={styles.subView}>
+      <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('UpdateProfile', {UserEmail: this.props.navigation.state.params.UserEmail})}>
+        <Text style={styles.btnTxt}>Update Profile</Text>
+        </TouchableOpacity>
       <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('ResetPassword', {UserEmail: this.props.navigation.state.params.UserEmail})}>
         <Text style={styles.btnTxt}>Reset Password</Text>
         </TouchableOpacity>
@@ -66,32 +71,46 @@ class LoanReportScreen extends Component {
 
 
 const MainNavigation = createBottomTabNavigator({
-    HomeScreen : {
-      screen: HomeScreen,
-      navigationOptions: ({navigation}) => ({
-        title: 'Home',
-        headerTitle: <Text>Home</Text>
-      })
-    },
-    LoanReportScreen : {
-      screen: LoanReportScreen,
-      navigationOptions: {
-        title: 'Loan Report',
-      },
-    },
-    ProfileScreen : {
-      screen: ProfileScreen,
-      navigationOptions: {
-        title: 'Profile',
+  Home: {
+    screen: HomeScreen, 
+    navigationOptions: {
+        tabBarLabel: 'Home', 
+        tabBarIcon: ({ tintColor }) => (
+            <Ionicons name="ios-home" color={tintColor} size={25} />
+        )
+    }
+}, 
+LoanReportScreen: {
+    screen: LoanReportScreen, 
+    navigationOptions: {
+        tabBarLabel: 'Loan Report', 
+        tabBarIcon: ({ tintColor }) => (
+            <Ionicons name="ios-paper" color={tintColor} size={25} />
+        )
+    }
+}, 
+ProfileScreen: {
+    screen: ProfileScreen, 
+    navigationOptions: {
+        tabBarLabel: 'Profile', 
+        tabBarIcon: ({ tintColor }) => (
+            <Ionicons name="ios-person" color={tintColor} size={25} />
+        )
       },
     },
   },
+  
   {
     headerMode: 'screen',
     headerVisible: true,
     navigationOptions: {
       headerMode: 'screen',
       headerVisible: true,
+      tabBarOptions: {
+        activeTintColor: 'blue', 
+        inactiveTintColor: 'black', 
+        showIcon: true
+    }
     },
   }
 );
@@ -135,9 +154,8 @@ const styles = StyleSheet.create({
   btn: {
     height: 50,
     width: 200,
-    backgroundColor: '#1E90FF',
+    backgroundColor: '#fd7e14',
     borderRadius: 80,
-    borderWidth: 2,
     marginLeft: 70,
     marginTop: 30,
     justifyContent: 'center',

@@ -104,7 +104,7 @@ export default class ResetPassword extends Component {
     subTxt: {
       color: 'black',
       marginTop: 20,
-      fontSize: 30,
+      fontSize: 20,
       fontWeight: 'bold',
       marginLeft: 40,
     },
@@ -118,9 +118,8 @@ export default class ResetPassword extends Component {
     btn: {
       height: 50,
       width: 200,
-      backgroundColor: '#1E90FF',
+      backgroundColor: '#fd7e14',
       borderRadius: 80,
-      borderWidth: 2,
       marginLeft: 70,
       marginTop: 30,
       justifyContent: 'center',

@@ -68,9 +68,8 @@ export default class ApplyLoan extends Component {
       btn: {
         height: 50,
         width: 200,
-        backgroundColor: '#1E90FF',
+        backgroundColor: '#fd7e14',
         borderRadius: 80,
-        borderWidth: 2,
         marginLeft: 70,
         marginTop: 30,
         justifyContent: 'center',

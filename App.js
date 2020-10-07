@@ -11,6 +11,7 @@ import LoanHistory from './screens/LoanHistory';
 import ResetPassword from './screens/ResetPassword';
 import LoanSimulation from './screens/LoanSimulation';
 import Simulator from './screens/Simulator';
+import UpdateProfile from './screens/UpdateProfile';
 import { createAppContainer} from 'react-navigation';
 
 
@@ -105,6 +106,13 @@ const RootNavigator = createStackNavigator({
   },
   Simulator: {
     screen: Simulator,
+    navigationOptions: {
+      headerShown: false,
+      headerTransparent: true,
+    },
+  },
+  UpdateProfile: {
+    screen: UpdateProfile,
     navigationOptions: {
       headerShown: false,
       headerTransparent: true,
