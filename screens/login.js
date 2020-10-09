@@ -9,22 +9,25 @@ import {
 import React, { Component } from 'react';
 
 
+
 export default class Login extends Component {
   constructor() {
     super();
     this.state = {
       UserEmail: '',
       Password: '',
+      EmailError: 'Email is required',
+      PasswordError : 'Password is required'
     }
   }
+  
   UserLoginFunction = () =>
   { 
     const {UserEmail} = this.state;
     const {Password} = this.state;
     //Check for email text input
     if (!UserEmail.trim() && !Password.trim()) {
-      alert('Email cannot be empty');
-      alert('Password cannot be empty');
+      alert('Email & Password cannot be empty');
       return;
     }
     var api = "http://192.168.0.18/edufund-api/Api/login.php?email=" + UserEmail + "&password=" + Password;
@@ -58,6 +61,7 @@ export default class Login extends Component {
           <TextInput style={styles.nameInput} 
           placeholder="Email" 
           onChangeText={UserEmail => this.setState ({UserEmail})}
+          keyboardType="email-address"
           >
           </TextInput>
           <TextInput style={styles.nameInput} placeholder="Password" onChangeText={(Password => { this.setState({ Password }) })}  secureTextEntry />

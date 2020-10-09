@@ -11,20 +11,19 @@ import {
     ActivityIndicator,
     Button,
   } from 'react-native';
-  import React, { Component } from 'react';
+  import React, { Component, setState } from 'react';
   import DatePicker from 'react-native-datepicker';
-  import { RadioButton } from 'react-native-paper';
-
+ 
   
   export default class UpdateProfile extends Component {
       constructor(props) {
         super(props);
         this.state = {
           UserEmail: '',
-          Idcardnumber: '',
+          idcardnumber: '',
           placeofbirth: '',
           dateofbirth: '',
-          gender: '',
+          Gender: '',
           Religion: '',
           ImageKTP: '',
           ImageSelfie: '',
@@ -35,15 +34,15 @@ import {
           Occupation: '',
           Fields: '',
           Position: '',
-          StatusofEmployment: '',
-          ProofofEmployment: '',
+          StatusOfEmployment: '',
+          ProofOfEmployment: '',
           ProofOfIncome: '',
           ProofOfBusiness: '',
           ProofOfBusinessIncome: '',
           Type: '',
           Status: '',
-          VillageID: '',
-          ProvinceID: '',
+          Village_ID: '',
+          Province_ID: '',
           Street: '',
           Number: '',
           RT: '',
@@ -58,12 +57,21 @@ import {
           Phone: '',
           Relationship : '',
           dataSource : [],
+          data : [],
           isLoading : true,
-
+          
         }
       }
+     
       
+   
       componentDidMount = () => {
+       this.GetProvince();
+       this.GetVillage();
+       this.GetProfile();
+      }
+
+      GetProvince = () => {
         return fetch('http://192.168.0.18/edufund-api/Api/province.php')
         .then((response) => response.json())
         .then((responseJson) => {
@@ -77,17 +85,94 @@ import {
         .catch((error) => {
           console.error(error);
         });
-    }
+      }
 
-  
-   
+      GetVillage = () => {
+        return fetch('http://192.168.0.18/edufund-api/Api/village.php')
+        .then((response) => response.json())
+        .then((responseJson) => {
+          this.setState({
+            isLoading: false,
+            data: responseJson
+          }, function() {
+            // In this block you can do something with new state.
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      }
       
+      
+
+      GetProfile = () => {
+        let UserEmail = this.props.navigation.state.params.UserEmail;
+        var api = "http://192.168.0.18/edufund-api/Api/getprofileaccountbyemail.php?email=" +UserEmail;
+        console.log(api);
+        return fetch(api)
+        .then((response) => response.json())
+        .then((responseJson) => {
+          this.setState({ 
+            data2: responseJson,
+            idcardnumber : responseJson.idcardnumber,
+            placeofbirth : responseJson.placeofbirth,
+            dateofbirth : responseJson.dateofbirth,
+            Gender : responseJson.Gender,
+            Religion : responseJson.Religion,
+            ImageKTP : responseJson.ImageKTP,
+            ImageSelfie : responseJson.ImageSelfie,
+            StatusMarriage : responseJson.StatusMarriage,
+            Education : responseJson.Education,
+            TaxID : responseJson.TaxID,
+            ImageFamilyMemberCard : responseJson.ImageFamilyMemberCard,
+            Occupation: responseJson.Occupation,
+            Fields : responseJson.Fields,
+            Position : responseJson.Position,
+            StatusOfEmployment : responseJson.StatusOfEmployment,
+            ProofOfEmployment : responseJson.ProofOfEmployment,
+            ProofOfIncome : responseJson.ProofOfIncome,
+            ProofOfBusiness : responseJson.ProofOfBusiness,
+            ProofOfBusinessIncome : responseJson.ProofOfBusinessIncome,
+            Status : responseJson.Status,
+            Type : responseJson.Type,
+            Village_ID : responseJson.Village_ID,
+            Province_ID : responseJson.Province_ID,
+            Street : responseJson.Street,
+            Number : responseJson.Number,
+            RT : responseJson.RT,
+            RW : responseJson.RW,
+            City : responseJson.City,
+            SubDistrict : responseJson.SubDistrict,
+            PostalCode : responseJson.PostalCode,
+            ResidentialStatus : responseJson.ResidentialStatus,
+            Duration : responseJson.Duration,
+            ProofOfResidence : responseJson.ProofOfResidence,
+            Name : responseJson.Name,
+            Phone : responseJson.Phone,
+            Relationship : responseJson.Relationship
+
+          })
+      if(responseJson.status === true)
+      {
+       
+        this.props.navigation.navigate('UpdateProfile')
+      }
+      else{
+        alert(responseJson.message)
+      }
+   
+       }).catch((error) => {
+         console.error(error);
+       });
+    
+   }
+
       UpdateProfileFunction = () => {
         let UserEmail = this.props.navigation.state.params.UserEmail;
-        const { Idcardnumber }  = this.state ;
+        const { idcardnumber }  = this.state;
         const { placeofbirth} = this.state;
-        const [dateofbirth] = this.state;
-        const {gender} = this.state;
+        const {dateofbirth} = this.state;
+        const {Gender} = this.state;
         const {Religion} = this.state;
         const {ImageKTP} = this.state;
         const {ImageSelfie} = this.state;
@@ -98,15 +183,14 @@ import {
         const {Occupation} = this.state;
         const {Fields} = this.state;
         const {Position} = this.state;
-        const {StatusofEmployment} = this.state;
-        const {ProofofEmployment} = this.state;
+        const {StatusOfEmployment} = this.state;
+        const {ProofOfEmployment} = this.state;
         const {ProofOfIncome} = this.state;
         const {ProofOfBusiness} = this.state;
         const {ProofOfBusinessIncome} = this.state;
         const {Type} = this.state;
-        const {Status} = this.state;
-        const {VillageID} = this.state;
-        const {ProvinceID} = this.state;
+        const {Village_ID} = this.state;
+        const {Province_ID} = this.state;
         const {Street} = this.state;
         const {Number} = this.state;
         const {RT} = this.state;
@@ -121,19 +205,18 @@ import {
         const {Phone} = this.state;
         const {Relationship} = this.state;
 
-        fetch("http://192.168.0.18/edufund-api/Api/profile.php",{
-          method: 'POST',
+        fetch("http://192.168.0.18/edufund-api/Api/profile.php?",{
+          method: 'PUT',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-     
-            email : UserEmail,
-            Idcardnumber : Idcardnumber,
+            email  : UserEmail,
+            idcardnumber : idcardnumber,
             placeofbirth: placeofbirth,
             dateofbirth: dateofbirth,
-            gender : gender,
+            Gender : Gender,
             Religion : Religion,
             ImageKTP : ImageKTP,
             ImageSelfie: ImageSelfie,
@@ -144,15 +227,15 @@ import {
             Occupation : Occupation,
             Fields: Fields,
             Position: Position,
-            StatusofEmployment : StatusofEmployment,
-            ProofofEmployment : ProofofEmployment,
+            StatusOfEmployment : StatusOfEmployment,
+            ProofOfEmployment : ProofOfEmployment,
             ProofOfIncome : ProofOfIncome,
             ProofOfBusiness: ProofOfBusiness,
             ProofOfBusinessIncome: ProofOfBusinessIncome,
             Type : Type,
-            Status : Status,
-            VillageID : VillageID,
-            ProvinceID: ProvinceID,
+            Status : 'Active',
+            Village_ID : Village_ID,
+            Province_ID: Province_ID,
             Street : Street,
             Number : Number,
             RT: RT,
@@ -172,10 +255,11 @@ import {
         })
         .then((response) => response.json())
         .then((responseJson) => {
-         console.log(responseJson.message);
+          console.log(responseJson.message);
          if(responseJson.success === 1)
           {
             alert(responseJson.message)
+            this.props.navigation.navigate('HomeScreen')
           
           }
           else{
@@ -191,7 +275,10 @@ import {
        
       render() 
       {
-        
+        var radio_props = [
+          {label: 'L', value: 0 },
+          {label: 'P', value: 1 }
+        ];
         if (this.state.isLoading) {
           return (
             <View style={{flex: 1, paddingTop: 20}}>
@@ -207,18 +294,21 @@ import {
             <Text style={styles.subTxt}>Email: { this.props.navigation.state.params.UserEmail }  </Text>
               <TextInput style={styles.nameInput} 
               placeholder="Id Card Number" 
-              onChangeText={Idcardnumber => this.setState ({Idcardnumber})}/>
+              onChangeText={idcardnumber => this.setState ({idcardnumber})}
+              value = {this.state.idcardnumber}
+              />
                 <TextInput style={styles.nameInput} 
               placeholder="Place of birth" 
-              onChangeText={placeofbirth => this.setState ({placeofbirth})}/>
+              onChangeText={placeofbirth => this.setState ({placeofbirth})}
+              value = {this.state.placeofbirth}/>
               <DatePicker
           style={{width: 300}}
-          date={this.state.dateofbirth} //initial date from state
-          mode="date" //The enum of date, datetime and time
+          date={this.state.dateofbirth} 
+          mode="date" 
           placeholder="select date of birth"
-          format="DD-MM-YYYY"
-          minDate="01-01-1950"
-          maxDate="31-12-2020"
+          format="YYYY-MM-DD"
+          minDate="1950-01-01"
+          maxDate="2020-12-31"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
           customStyles={{
@@ -233,91 +323,173 @@ import {
             }
           }}
           onDateChange={(dateofbirth) => {this.setState({dateofbirth: dateofbirth})}}
+          value = {this.state.dateofbirth}
         />
-               <TextInput style={styles.nameInput} 
-              placeholder="Education" 
-              onChangeText={Education => this.setState ({Education})}/>
+            <Text  style = {styles.subTxt}>Gender</Text>
+          <Picker
+           style = {styles.subTxt}
+          selectedValue={this.state.Gender}
+          onValueChange={(itemValue, itemIndex) => this.setState({ Gender: itemValue })}>
+          <Picker.Item label="L" value="L" />
+          <Picker.Item label="P" value= "P" />
+          </Picker>
+          <Text  style = {styles.subTxt}>Religion</Text>
+          <Picker
+           style = {styles.subTxt}
+          selectedValue={this.state.Religion}
+          onValueChange={(itemValue, itemIndex) => this.setState({ Religion: itemValue })}>
+          <Picker.Item label="Kristen" value="Kristen" />
+          <Picker.Item label="Katolik" value= "Katolik" />
+          <Picker.Item label="Islam" value= "Islam" />
+          <Picker.Item label="Hindu" value= "Hindu" />
+          <Picker.Item label="Buddha" value= "Buddha" />
+          </Picker>
+              <TextInput style={styles.nameInput} 
+              placeholder="ImageKTP" 
+              onChangeText={ImageKTP => this.setState ({ImageKTP})}
+              value = {this.state.ImageKTP}/>
+              <TextInput style={styles.nameInput} 
+              placeholder="ImageSelfie" 
+              onChangeText={ImageSelfie => this.setState ({ImageSelfie})}
+              value = {this.state.ImageSelfie}/>
+              <Text  style = {styles.subTxt}>Status Marriage</Text>
+               <Picker
+                style = {styles.subTxt}
+                selectedValue={this.state.StatusMarriage}
+                onValueChange={(itemValue, itemIndex) => this.setState({ StatusMarriage: itemValue })}>
+                <Picker.Item label="Married" value="Married" />
+                <Picker.Item label="Not Married" value= "Not Married" />
+              </Picker>
+               <Text  style = {styles.subTxt}>Education</Text>
+               <Picker
+                style = {styles.subTxt}
+                selectedValue={this.state.Education}
+                onValueChange={(itemValue, itemIndex) => this.setState({ Education: itemValue })}>
+                <Picker.Item label="D3" value="D3" />
+                <Picker.Item label="S1" value= "S1" />
+                <Picker.Item label="S2" value= "S2" />
+                <Picker.Item label="S3" value= "S3" />
+              </Picker>
               <TextInput style={styles.nameInput} 
               placeholder="Tax ID" 
-              onChangeText={TaxID => this.setState ({TaxID})}/>
+              onChangeText={TaxID => this.setState ({TaxID})}
+              value = {this.state.TaxID}/>
+              <TextInput style={styles.nameInput} 
+              placeholder="ImageFamilyMemberCard" 
+              onChangeText={ImageFamilyMemberCard => this.setState ({ImageFamilyMemberCard})}
+              value = {this.state.ImageFamilyMemberCard}/>
               <TextInput style={styles.nameInput} 
               placeholder="Occupation" 
-              onChangeText={Occupation => this.setState ({Occupation})}/>
+              onChangeText={Occupation => this.setState ({Occupation})}
+              value = {this.state.Occupation}/>
               <TextInput style={styles.nameInput} 
               placeholder="Fields" 
-              onChangeText={Fields => this.setState ({Fields})}/>
+              onChangeText={Fields => this.setState ({Fields})}
+              value = {this.state.Fields}/>
                <TextInput style={styles.nameInput} 
               placeholder="Position" 
-              onChangeText={Position => this.setState ({Position})}/>
+              onChangeText={Position => this.setState ({Position})}
+              value = {this.state.Position}/>
                <TextInput style={styles.nameInput} 
               placeholder="Status Of Employment" 
-              onChangeText={StatusofEmployment => this.setState ({StatusofEmployment})}/>
+              onChangeText={StatusOfEmployment => this.setState ({StatusOfEmployment})}
+              value = {this.state.StatusOfEmployment}/>
                <TextInput style={styles.nameInput} 
               placeholder="Proof Of Employment" 
-              onChangeText={ProofofEmployment => this.setState ({ProofofEmployment})}/>
+              onChangeText={ProofOfEmployment => this.setState ({ProofOfEmployment})}
+              value = {this.state.ProofOfEmployment}/>
                <TextInput style={styles.nameInput} 
               placeholder="Proof Of Income" 
-              onChangeText={ProofofIncome => this.setState ({ProofofIncome})}/>
+              onChangeText={ProofOfIncome => this.setState ({ProofOfIncome})}
+              value = {this.state.ProofOfIncome}/>
                <TextInput style={styles.nameInput} 
               placeholder="Proof Of Business" 
-              onChangeText={ProofOfBusiness => this.setState ({ProofOfBusiness})}/>
+              onChangeText={ProofOfBusiness => this.setState ({ProofOfBusiness})}
+              value = {this.state.ProofOfBusiness}/>
                 <TextInput style={styles.nameInput} 
               placeholder="Proof Of Business Income" 
-              onChangeText={ProofOfBusinessIncome => this.setState ({ProofOfBusinessIncome})}/>
+              onChangeText={ProofOfBusinessIncome => this.setState ({ProofOfBusinessIncome})}
+              value = {this.state.ProofOfBusinessIncome}/>
                 <TextInput style={styles.nameInput} 
               placeholder="Type" 
-              onChangeText={Type => this.setState ({Type})}/>
-
+              onChangeText={Type => this.setState ({Type})}
+              value = {this.state.Type}/>
+              
+              
                <Text style={styles.subTxt}>Address</Text>
+               <Text  style = {styles.subTxt}>Village</Text>
                <Picker
-            selectedValue={this.state.ProvinceID}
-            onValueChange={(itemValue, itemIndex) => this.setState({ProvinceID: itemValue})} justifyContent={'center'} alignItems={'center'}  >
+            style = {styles.subTxt}
+            selectedValue={this.state.Village_ID}
+            onValueChange={(itemValue, itemIndex) => this.setState({Village_ID: itemValue})} justifyContent={'center'} alignItems={'center'}   >
+            { this.state.data.map((item, key)=>(
+            <Picker.Item label={item.village_name} value={item.village_id} key={key}/>)
+            )}
+          </Picker>
+          <Text  style = {styles.subTxt}>Province</Text>
+          <Picker
+          style = {styles.subTxt}
+            selectedValue={this.state.Province_ID}
+            onValueChange={(itemValue, itemIndex) => this.setState({Province_ID: itemValue})} justifyContent={'center'} alignItems={'center'}  >
             { this.state.dataSource.map((item, key)=>(
-            <Picker.Item label={item.province_name} value={item.province_name} key={key}/>)
+           <Picker.Item label={item.province_name} value={item.province_id} key={key}/>)
             )}
           </Picker>
                <TextInput style={styles.nameInput} 
               placeholder="Street" 
-              onChangeText={Street => this.setState ({Street})}/>
+              onChangeText={Street => this.setState ({Street})}
+              value = {this.state.Street}/>
               <TextInput style={styles.nameInput} 
               placeholder="Number" 
-              onChangeText={Number => this.setState ({Number})}/>
+              onChangeText={Number => this.setState ({Number})}
+              value = {this.state.Number}/>
               <TextInput style={styles.nameInput} 
               placeholder="RT" 
-              onChangeText={RT => this.setState ({RT})}/>
+              onChangeText={RT => this.setState ({RT})}
+              value = {this.state.RT}/>
               <TextInput style={styles.nameInput} 
               placeholder="RW" 
-              onChangeText={RW => this.setState ({RW})}/>
+              onChangeText={RW => this.setState ({RW})}
+              value = {this.state.RW}/>
                <TextInput style={styles.nameInput} 
               placeholder="City" 
-              onChangeText={City => this.setState ({City})}/>
+              onChangeText={City => this.setState ({City})}
+              value = {this.state.City}/>
                <TextInput style={styles.nameInput} 
               placeholder="Sub District" 
-              onChangeText={SubDistrict => this.setState ({SubDistrict})}/>
+              onChangeText={SubDistrict => this.setState ({SubDistrict})}
+              value = {this.state.SubDistrict}/>
                <TextInput style={styles.nameInput} 
               placeholder="Postal Code" 
-              onChangeText={PostalCode => this.setState ({PostalCode})}/>
+              onChangeText={PostalCode => this.setState ({PostalCode})}
+              value = {this.state.PostalCode}/>
                <TextInput style={styles.nameInput} 
               placeholder="Residential Status" 
-              onChangeText={ResidentialStatus => this.setState ({ResidentialStatus})}/>
+              onChangeText={ResidentialStatus => this.setState ({ResidentialStatus})}
+              value = {this.state.ResidentialStatus}/>
                <TextInput style={styles.nameInput} 
               placeholder="Duration" 
-              onChangeText={Duration => this.setState ({Duration})}/>
+              onChangeText={Duration => this.setState ({Duration})}
+              value = {this.state.Duration}/>
                <TextInput style={styles.nameInput} 
               placeholder="Proof Of Residence" 
-              onChangeText={ProofOfResidence => this.setState ({ProofOfResidence})}/>
+              onChangeText={ProofOfResidence => this.setState ({ProofOfResidence})}
+              value = {this.state.ProofOfResidence}/>
               
                <Text style={styles.subTxt}>Emergency Contact</Text>
                <TextInput style={styles.nameInput} 
               placeholder="Name Emergency Contact" 
-              onChangeText={Name => this.setState ({Name})}/>
+              onChangeText={Name => this.setState ({Name})}
+              value = {this.state.Name}/>
                <TextInput style={styles.nameInput} 
               placeholder="Phone Emergency Contact" 
-              onChangeText={Phone => this.setState ({Phone})}/>
+              onChangeText={Phone => this.setState ({Phone})}
+              value = {this.state.Phone}/>
                <TextInput style={styles.nameInput} 
               placeholder="Relationship" 
-              onChangeText={Relationship => this.setState ({Relationship})}/>
-               <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('UpdateProfile')}>
+              onChangeText={Relationship => this.setState ({Relationship})}
+              value = {this.state.Relationship}/>
+               <TouchableOpacity style={styles.btn}  onPress={this.UpdateProfileFunction}>
               <Text style={styles.btnTxt}>Update Profile</Text>
               </TouchableOpacity>
             <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('HomeScreen')}>
@@ -366,7 +538,7 @@ import {
       subTxt: {
         color: 'black',
         marginTop: 20,
-        fontSize: 20,
+        fontSize: 15,
         fontWeight: 'bold',
         marginLeft: 40,
       },
