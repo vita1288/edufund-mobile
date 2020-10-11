@@ -275,10 +275,6 @@ import {
        
       render() 
       {
-        var radio_props = [
-          {label: 'L', value: 0 },
-          {label: 'P', value: 1 }
-        ];
         if (this.state.isLoading) {
           return (
             <View style={{flex: 1, paddingTop: 20}}>
@@ -330,8 +326,8 @@ import {
            style = {styles.subTxt}
           selectedValue={this.state.Gender}
           onValueChange={(itemValue, itemIndex) => this.setState({ Gender: itemValue })}>
-          <Picker.Item label="L" value="L" />
-          <Picker.Item label="P" value= "P" />
+          <Picker.Item label="Laki-Laki" value="L" />
+          <Picker.Item label="Perempuan" value= "P" />
           </Picker>
           <Text  style = {styles.subTxt}>Religion</Text>
           <Picker

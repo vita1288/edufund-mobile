@@ -9,6 +9,7 @@ import ForgotPassword from './screens/ForgotPassword';
 import ApplyLoan from './screens/ApplyLoan';
 import LoanHistory from './screens/LoanHistory';
 import ResetPassword from './screens/ResetPassword';
+import LoanApplicationForm from './screens/LoanApplicationForm';
 import LoanSimulation from './screens/LoanSimulation';
 import Simulator from './screens/Simulator';
 import UpdateProfile from './screens/UpdateProfile';
@@ -114,6 +115,13 @@ const RootNavigator = createStackNavigator({
   },
   UpdateProfile: {
     screen: UpdateProfile,
+    navigationOptions: {
+      headerShown: false,
+      headerTransparent: true,
+    },
+  },
+  LoanApplicationForm: {
+    screen: LoanApplicationForm,
     navigationOptions: {
       headerShown: false,
       headerTransparent: true,

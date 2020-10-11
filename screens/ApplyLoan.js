@@ -1,22 +1,42 @@
 
 import {
-    Text,
-    View,
-    StyleSheet,
-    TextInput,
-    TouchableOpacity,
-    Alert
-  } from 'react-native';
-  import React, { Component } from 'react';
+  Text,
+  View,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  ScrollView,
+  Picker,
+  ActivityIndicator,
+  Button,
+} from 'react-native';
+import React, { Component, setState } from 'react';
+import DatePicker from 'react-native-datepicker';
   
   
 export default class ApplyLoan extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      Product: '',
+      amount_without_interest : '',
+      
+    }
+  }
+ 
+
       render() 
       {
         return (
           <View style={styles.container}>
-            <Text style={styles.headerTxt}>Loan Application Form </Text>
+            <Text style={styles.headerTxt}>Apply Loan </Text>
             <View style={styles.subView}>
+              
+              <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('LoanApplicationForm')}>
+              <Text style={styles.btnTxt}>Loan Application Form</Text>
+            </TouchableOpacity>
+           
             <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('LoanSimulation')}>
               <Text style={styles.btnTxt}>Loan Simulation</Text>
             </TouchableOpacity>
