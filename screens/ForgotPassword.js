@@ -7,6 +7,7 @@ import {
     Alert
   } from 'react-native';
   import React, { Component } from 'react';
+  import { HelperText } from 'react-native-paper';
   
   
   export default class ForgotPassword extends Component {
@@ -14,13 +15,14 @@ import {
       super();
       this.state = {
         UserEmail: '',
+        showError : false,
       }
     }
     
     ForgotFunction = () => {
     const {UserEmail} = this.state;
     if (!UserEmail.trim()) {
-      alert('Email cannot be empty');
+      this.setState ({showError: this.state.UserEmail === ""})
       return;
     }
     fetch("http://192.168.0.18/edufund-api/Api/forgotpassword.php",{
@@ -43,7 +45,8 @@ import {
         alert(responseJson.message)
         this.props.navigation.navigate('login')
       }
-      else{
+      else 
+      {
         alert(responseJson.message)
       }
    
@@ -65,6 +68,9 @@ import {
             onChangeText={UserEmail => this.setState ({UserEmail})}
             >
             </TextInput>
+        <HelperText type="error" visible={this.state.showError}>
+        Email cannot be empty!
+      </HelperText>
             <TouchableOpacity style={styles.btn} onPress={this.ForgotFunction}>
               <Text style={styles.btnTxt}>Send Forgot Instruction</Text>
             </TouchableOpacity>

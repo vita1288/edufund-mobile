@@ -157,9 +157,7 @@ import {
        
         this.props.navigation.navigate('UpdateProfile')
       }
-      else{
-        alert(responseJson.message)
-      }
+   
    
        }).catch((error) => {
          console.error(error);
@@ -204,6 +202,8 @@ import {
         const {Name} = this.state;
         const {Phone} = this.state;
         const {Relationship} = this.state;
+
+     
 
         fetch("http://192.168.0.18/edufund-api/Api/profile.php?",{
           method: 'PUT',

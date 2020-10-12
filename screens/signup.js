@@ -4,30 +4,41 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  ScrollView
 } from 'react-native';
 import React, { Component } from 'react';
+import { HelperText } from 'react-native-paper';
 
 
 export default class Signup extends Component {
   constructor() {
     super();
     this.state = {
-      Email: '',
+      UserEmail: '',
       Password: '',
-      Phonenumber : ''
+      Phonenumber : '',
+      showError : false
     }
   }
   SignUpFunction = () => {
-    const { Email }  = this.state ;
+    const { UserEmail }  = this.state ;
     const { Password }  = this.state ;
     const { Phonenumber} = this.state;
-    //Check for email text input
-    if (!Email.trim() && !Password.trim() && !Phonenumber.trim()) {
-      alert('Email cannot be empty');
-      alert('Password cannot be empty');
-      alert('Phone number cannot be empty');
+    if (!UserEmail.trim()) {
+      this.setState ({showError: this.state.UserEmail === ""})
       return;
     }
+    if (!Password.trim()) {
+      this.setState ({showError: this.state.Password === ""})
+      return;
+    }
+    if (!Phonenumber.trim()) {
+      this.setState ({showError: this.state.Phonenumber === ""})
+      return;
+    }
+
+
+
     fetch("http://192.168.0.18/edufund-api/Api/signup.php",{
       method: 'POST',
       headers: {
@@ -36,7 +47,7 @@ export default class Signup extends Component {
       },
       body: JSON.stringify({
  
-      email : Email,
+      email : UserEmail,
 
       password: Password,
 
@@ -49,11 +60,10 @@ export default class Signup extends Component {
      /*console.log(responseJson.message);*/
       if(responseJson.success === 1)
       {
-        console.log(responseJson.message);
         alert(responseJson.message);
         this.props.navigation.navigate('login');
       }
-      else{
+      else if(responseJson.success === 0){
         alert(responseJson.message)
       }
    
@@ -65,15 +75,30 @@ export default class Signup extends Component {
   render() 
   {
     return (
-      <View style={styles.container}>
+      <ScrollView>
+ <View style={styles.container}>
         <Text style={styles.headerTxt}>Welcome to Edufund</Text>
         <View style={styles.subView}>
           <Text style={styles.subTxt}>Create Account</Text>
-          <TextInput style={styles.nameInput} placeholder="Email" onChangeText={(Email => { this.setState({ Email }) })} />
-          <TextInput style={styles.nameInput} placeholder="Password" onChangeText={(Password => { this.setState({ Password }) })} 
-          secureTextEntry
+          <TextInput style={styles.nameInput} 
+          placeholder="Email" 
+          onChangeText={UserEmail => this.setState ({UserEmail, UserEmail}) }
+          keyboardType="email-address"
+          >
+          </TextInput>
+          <HelperText type="error" visible={this.state.showError}>
+        Email cannot be empty!
+      </HelperText>
+          <TextInput style={styles.nameInput} placeholder="Password" onChangeText={(Password => { this.setState({ Password }) })}  secureTextEntry
+         />
+         <HelperText type="error" visible={this.state.showError}>
+       Password cannot be empty !
+      </HelperText>
+          <TextInput style={styles.nameInput} placeholder="Phone Number" onChangeText={(Phonenumber => { this.setState({ Phonenumber }) })} 
           />
-          <TextInput style={styles.nameInput} placeholder="Phone Number" onChangeText={(Phonenumber => { this.setState({ Phonenumber }) })} />
+            <HelperText type="error" visible={this.state.showError}>
+       Phone Number cannot be empty !
+      </HelperText>
           <TouchableOpacity style={styles.btn} onPress={this.SignUpFunction}>
             <Text style={styles.btnTxt}>Sign Up</Text>
           </TouchableOpacity>
@@ -87,6 +112,8 @@ export default class Signup extends Component {
           </View>
         </View>
       </View>
+      </ScrollView>
+     
     );
   }
 }
@@ -98,7 +125,7 @@ const styles = StyleSheet.create({
   },
   subView: {
     backgroundColor: 'white',
-    height: 430,
+    height: 500,
     marginTop: 240,
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
@@ -126,7 +153,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   btn: {
-    height: 50,
+    height: 40,
     width: 200,
     backgroundColor: '#fd7e14',
     borderRadius: 80,
@@ -154,7 +181,7 @@ const styles = StyleSheet.create({
     marginRight: 80,
   },
   loginTxt: {
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: 'bold',
     marginTop: 17,
   },

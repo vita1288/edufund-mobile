@@ -8,6 +8,7 @@ import {
     FlatList,
   } from 'react-native';
   import React, { Component } from 'react';
+  import { HelperText } from 'react-native-paper';
   
   
   export default class LoanSimulation extends Component {
@@ -21,6 +22,7 @@ import {
         Periodtime : '',
         interestpermonth: '',
         loanamountrequest: '',
+        showError : false,
         dataSource: []
       };
     }
@@ -33,13 +35,19 @@ import {
       const {interestpermonth} = this.state;
       const {loanamountrequest} = this.state;
       //Check for Period Time text input
-      if (!Periodtime.trim() && !interestpermonth.trim() && !loanamountrequest.trim()) {
-        alert('Period Time cannot be empty');
-        alert('Interest Per Month cannot be empty');
-        alert('Loan Amount Request cannot be empty');
+      if (!Periodtime.trim()) {
+        this.setState ({showError: this.state.Periodtime === ""})
         return;
       }
-      //Checked Successfully
+      if (!interestpermonth.trim()) {
+        this.setState ({showError: this.state.interestpermonth === ""})
+        return;
+      }
+      if (!loanamountrequest.trim()) {
+        this.setState ({showError: this.state.loanamountrequest === ""})
+        return;
+      }
+
       this.props.navigation.navigate('Simulator', { Periodtime : Periodtime, interestpermonth: interestpermonth, loanamountrequest: loanamountrequest })
     };
 
@@ -55,8 +63,19 @@ import {
               onChangeText={Periodtime => this.setState ({Periodtime})}
               >
               </TextInput>
-              <TextInput style={styles.nameInput} placeholder="Interest" onChangeText={(interestpermonth => { this.setState({ interestpermonth }) })}/>
-              <TextInput style={styles.nameInput} placeholder="Loan Amount Request" onChangeText={(loanamountrequest => { this.setState({ loanamountrequest }) })}/>
+              <HelperText type="error" visible={this.state.showError}>
+        Period Time cannot be empty!
+      </HelperText>
+              <TextInput style={styles.nameInput} placeholder="Interest" onChangeText={(interestpermonth => { this.setState({ interestpermonth }) })}
+              />
+              <HelperText type="error" visible={this.state.showError}>
+        Interest cannot be empty!
+      </HelperText>
+              <TextInput style={styles.nameInput} placeholder="Loan Amount Request" onChangeText={(loanamountrequest => { this.setState({ loanamountrequest }) })}
+              />
+               <HelperText type="error" visible={this.state.showError}>
+        Loan Amount Request cannot be empty!
+      </HelperText>
               <TouchableOpacity style={styles.btn} onPress={this.SimulationFunction}>
                 <Text style={styles.btnTxt}>Check Simulation</Text>
               </TouchableOpacity>

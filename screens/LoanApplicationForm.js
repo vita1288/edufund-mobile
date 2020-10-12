@@ -20,28 +20,40 @@ import {
       super(props);
       this.state = {
         Product: '',
-        amount_without_interest : '',
-        duration : '',
+        amount_without_interest : 1000000,
       }
+    }
+
+    change(amount_without_interest) {
+      this.setState(() => {
+        return {
+          amount_without_interest: parseFloat(amount_without_interest)
+        };
+      });
     }
         render() 
         {
+          const {amount_without_interest} = this.state;
     
           return (
             <View style={styles.container}>
               <Text style={styles.headerTxt}>Loan Application Form </Text>
               <View style={styles.subView}>
               <TextInput style={styles.nameInput} 
-                placeholder="Product Name" 
+                placeholder="Choose Your Product" 
                 onChangeText={Product=> this.setState ({Product})}
                 />
-            <TextInput style={styles.nameInput} 
-                placeholder="Loan Nominal" 
-                onChangeText={amount_without_interest => this.setState ({amount_without_interest})}
-                />
                 <View>
-                    <Text style = {styles.subTxt}>Duration</Text>
-                
+                    <Text style = {styles.subTxt}>Loan Nominal</Text>
+                    <Text style={styles.subTxt}> {String(amount_without_interest)}</Text>
+        <Slider 
+          step={1000000}
+          maximumValue={48000000}
+          minimumTrackTintColor="#307ecc"
+          maximumTrackTintColor="#000000"
+          onValueChange={this.change.bind(this)}
+          value={amount_without_interest}
+        />
                 </View>
             
                  
@@ -87,6 +99,10 @@ import {
           fontWeight: 'bold',
           marginLeft: 40,
         },
+        text: {
+          fontSize: 15,
+          textAlign: 'center'
+        },
         nameInput: {
           height: 40,
           width: 270,
@@ -128,7 +144,7 @@ import {
           marginTop: 24,
         },
         TextComponentStyle: {
-            fontSize: 20,
+          fontSize: 20,
            color: "#000",
            textAlign: 'center', 
            marginBottom: 15

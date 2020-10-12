@@ -7,6 +7,7 @@ import {
   Alert
 } from 'react-native';
 import React, { Component } from 'react';
+import { HelperText } from 'react-native-paper';
 
 
 
@@ -16,8 +17,7 @@ export default class Login extends Component {
     this.state = {
       UserEmail: '',
       Password: '',
-      EmailError: 'Email is required',
-      PasswordError : 'Password is required'
+      showError: false
     }
   }
   
@@ -25,11 +25,15 @@ export default class Login extends Component {
   { 
     const {UserEmail} = this.state;
     const {Password} = this.state;
-    //Check for email text input
-    if (!UserEmail.trim() && !Password.trim()) {
-      alert('Email & Password cannot be empty');
+    if (!UserEmail.trim()) {
+      this.setState ({showError: this.state.UserEmail === ""})
       return;
     }
+    if (!Password.trim()) {
+      this.setState ({showError: this.state.Password === ""})
+      return;
+    }
+
     var api = "http://192.168.0.18/edufund-api/Api/login.php?email=" + UserEmail + "&password=" + Password;
     console.log(api);
     return fetch(api)
@@ -41,7 +45,8 @@ export default class Login extends Component {
         console.log(UserEmail);
         this.props.navigation.navigate('HomeScreen', { UserEmail : UserEmail });
       }
-      else{
+      else 
+      {
         alert(responseJson.message)
       }
    
@@ -60,11 +65,18 @@ export default class Login extends Component {
           <Text style={styles.subTxt}>Login Form</Text>
           <TextInput style={styles.nameInput} 
           placeholder="Email" 
-          onChangeText={UserEmail => this.setState ({UserEmail})}
+          onChangeText={UserEmail => this.setState ({UserEmail, UserEmail}) }
           keyboardType="email-address"
           >
           </TextInput>
-          <TextInput style={styles.nameInput} placeholder="Password" onChangeText={(Password => { this.setState({ Password }) })}  secureTextEntry />
+          <HelperText type="error" visible={this.state.showError}>
+        Email cannot be empty!
+      </HelperText>
+          <TextInput style={styles.nameInput} placeholder="Password" onChangeText={(Password => { this.setState({ Password }) })}  secureTextEntry
+         />
+         <HelperText type="error" visible={this.state.showError}>
+       Password cannot be empty !
+      </HelperText>
           <TouchableOpacity style={styles.btn} onPress={this.UserLoginFunction}>
             <Text style={styles.btnTxt}>Login</Text>
           </TouchableOpacity>
@@ -91,7 +103,7 @@ const styles = StyleSheet.create({
   },
   subView: {
     backgroundColor: 'white',
-    height: 400,
+    height: 500,
     marginTop: 240,
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
@@ -119,7 +131,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   btn: {
-    height: 50,
+    height: 40,
     width: 200,
     backgroundColor: '#fd7e14',
     borderRadius: 80,

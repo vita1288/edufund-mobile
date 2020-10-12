@@ -8,6 +8,7 @@ import {
   Alert
 } from 'react-native';
 import React, { Component } from 'react';
+import { HelperText } from 'react-native-paper';
 
 export default class ResetPassword extends Component {
     constructor() {
@@ -15,6 +16,7 @@ export default class ResetPassword extends Component {
       this.state = {
         UserEmail: '',
         Password: '',
+        showError : false,
       }
     }
     
@@ -24,7 +26,7 @@ export default class ResetPassword extends Component {
         //const { UserEmail }  = this.state;
         const { Password }  = this.state ;
         if (!Password.trim()) {
-          alert('Password cannot be empty');
+          this.setState ({showError: this.state.Password === ""})
           return;
         }
         fetch("http://192.168.0.18/edufund-api/Api/reset_password.php",{
@@ -47,7 +49,7 @@ export default class ResetPassword extends Component {
               alert(responseJson.message)
               this.props.navigation.navigate('HomeScreen');
             }
-            else{
+            else {
               alert(responseJson.message)
             }
          
@@ -65,6 +67,9 @@ export default class ResetPassword extends Component {
           <TextInput style={styles.nameInput} placeholder="Password" onChangeText={(Password => { this.setState({ Password }) })} 
           secureTextEntry
           />
+          <HelperText type="error" visible={this.state.showError}>
+       Password cannot be empty !
+      </HelperText>
           <TouchableOpacity style={styles.btn} onPress={this.ResetPasswordFunction}>
             <Text style={styles.btnTxt}>Change Password</Text>
           </TouchableOpacity>
