@@ -23,7 +23,6 @@ import {
         interestpermonth: '',
         loanamountrequest: '',
         showError : false,
-        dataSource: []
       };
     }
     componentDidMount() {
@@ -79,14 +78,6 @@ import {
               <TouchableOpacity style={styles.btn} onPress={this.SimulationFunction}>
                 <Text style={styles.btnTxt}>Check Simulation</Text>
               </TouchableOpacity>
-
-              <FlatList
-                data={this.state.data}
-                keyExtractor={(x, i) => i}
-                renderItem={({item}) =>
-                <Text>{item.No}, ,{item.interest}, {item.balance}, {item.principal}, {item.installment}</Text>
-                  }
-              />
 
           </View>
         </View>

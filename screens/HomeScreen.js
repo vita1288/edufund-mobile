@@ -11,7 +11,7 @@ class HomeScreen extends Component {
   };
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.container} >
       <Text style={styles.headerTxt}>Welcome, { this.props.navigation.state.params.UserEmail }  </Text>
       <View style={styles.subView}>
       <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('ApplyLoan')}>

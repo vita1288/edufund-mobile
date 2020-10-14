@@ -12,7 +12,7 @@ import {
   Button,
 } from 'react-native';
 import React, { Component, setState } from 'react';
-import DatePicker from 'react-native-datepicker';
+
   
   
 export default class ApplyLoan extends Component {
@@ -98,7 +98,7 @@ export default class ApplyLoan extends Component {
       btnTxt: {
         color: 'white',
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 15,
       },
       endView: {
         flexDirection: 'row',

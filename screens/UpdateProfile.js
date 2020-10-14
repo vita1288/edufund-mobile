@@ -326,6 +326,7 @@ import {
            style = {styles.subTxt}
           selectedValue={this.state.Gender}
           onValueChange={(itemValue, itemIndex) => this.setState({ Gender: itemValue })}>
+            <Picker.Item label="select gender" value="0" />
           <Picker.Item label="Laki-Laki" value="L" />
           <Picker.Item label="Perempuan" value= "P" />
           </Picker>
@@ -334,6 +335,7 @@ import {
            style = {styles.subTxt}
           selectedValue={this.state.Religion}
           onValueChange={(itemValue, itemIndex) => this.setState({ Religion: itemValue })}>
+           <Picker.Item label="select religion" value="0" />
           <Picker.Item label="Kristen" value="Kristen" />
           <Picker.Item label="Katolik" value= "Katolik" />
           <Picker.Item label="Islam" value= "Islam" />
@@ -353,6 +355,7 @@ import {
                 style = {styles.subTxt}
                 selectedValue={this.state.StatusMarriage}
                 onValueChange={(itemValue, itemIndex) => this.setState({ StatusMarriage: itemValue })}>
+                <Picker.Item label="select status marriage" value="0" />
                 <Picker.Item label="Married" value="Married" />
                 <Picker.Item label="Not Married" value= "Not Married" />
               </Picker>
@@ -361,6 +364,7 @@ import {
                 style = {styles.subTxt}
                 selectedValue={this.state.Education}
                 onValueChange={(itemValue, itemIndex) => this.setState({ Education: itemValue })}>
+                <Picker.Item label="select education" value="0" />
                 <Picker.Item label="D3" value="D3" />
                 <Picker.Item label="S1" value= "S1" />
                 <Picker.Item label="S2" value= "S2" />

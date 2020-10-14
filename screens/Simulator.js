@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
  
-import { StyleSheet, View, Alert, TextInput, Button, Text, Platform, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { SectionList, StyleSheet, View, Alert, TextInput, Button, Text, Platform, TouchableOpacity, ActivityIndicator } from 'react-native';
  
 import { FlatList } from 'react-native-gesture-handler';
 
-import ListView from "deprecated-react-native-listview";
 
 
 class Simulator extends Component {
@@ -19,7 +18,7 @@ class Simulator extends Component {
       Periodtime : '',
       interestpermonth: '',
       loanamountrequest: '',
-      dataSource: []
+      data: []
     };
   }
   componentDidMount() {

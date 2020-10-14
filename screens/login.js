@@ -3,8 +3,7 @@ import {
   View,
   StyleSheet,
   TextInput,
-  TouchableOpacity,
-  Alert
+  TouchableOpacity
 } from 'react-native';
 import React, { Component } from 'react';
 import { HelperText } from 'react-native-paper';
@@ -65,7 +64,7 @@ export default class Login extends Component {
           <Text style={styles.subTxt}>Login Form</Text>
           <TextInput style={styles.nameInput} 
           placeholder="Email" 
-          onChangeText={UserEmail => this.setState ({UserEmail, UserEmail}) }
+          onChangeText={UserEmail => this.setState ({UserEmail}) }
           keyboardType="email-address"
           >
           </TextInput>

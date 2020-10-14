@@ -14,6 +14,7 @@ import LoanSimulation from './screens/LoanSimulation';
 import Simulator from './screens/Simulator';
 import UpdateProfile from './screens/UpdateProfile';
 import { createAppContainer} from 'react-navigation';
+import LoanSimulationSummary from './screens/LoanSimulationSummary';
 
 
 
@@ -73,6 +74,13 @@ const RootNavigator = createStackNavigator({
   },
   ApplyLoan: {
     screen: ApplyLoan,
+    navigationOptions: {
+      headerShown: false,
+      headerTransparent: true,
+    },
+  },
+  LoanSimulationSummary: {
+    screen: LoanSimulationSummary,
     navigationOptions: {
       headerShown: false,
       headerTransparent: true,
