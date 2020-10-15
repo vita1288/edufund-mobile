@@ -54,23 +54,24 @@ GetSimulation = async () => {
       <View style={styles.container}>
         <Text style={styles.headerTxt}>Loan Simulation</Text>
         <View style={styles.subView}>
+      
           <Text style={styles.subTxt}>Loan Simulation Result</Text>
-   <ScrollView>
+   
    <View style = {{backgroundColor:'#1E90FF',margin:15, justifyContent: 'center'}}>
-    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white', borderRadius:18}}> Period time:    { this.props.navigation.state.params.periodtime}</Text>
-    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white', borderRadius:18}}> Interest Per Month :  { this.props.navigation.state.params.interestpermonth}</Text>
-    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white', borderRadius:18}}> Loan Amount Request:  Rp { this.props.navigation.state.params.loanamountrequest}</Text>
-    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white', borderRadius:18}}> Total Loan Amount Request: Rp {this.state.totalloanamountrequest}</Text>
-    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white', borderRadius:18}}> Total Interest: Rp {this.state.totalinterest}</Text>
-    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white', borderRadius:18}}> Total Installment: Rp {this.state.totalinstallment}</Text>
-    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white', borderRadius:18}}> DP: Rp {this.state.dp}</Text>
+   <ScrollView>
+    <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Period time:    { this.props.navigation.state.params.periodtime}</Text>
+    <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Interest Per Month :  { this.props.navigation.state.params.interestpermonth}</Text>
+    <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Loan Amount Request:  Rp { this.props.navigation.state.params.loanamountrequest}</Text>
+    <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Total Loan Amount Request: Rp {this.state.totalloanamountrequest}</Text>
+    <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Total Interest: Rp {this.state.totalinterest}</Text>
+    <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Total Installment: Rp {this.state.totalinstallment}</Text>
+    <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> DP: Rp {this.state.dp}</Text>
     
-     
+    </ScrollView>   
       </View>  
       <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('LoanApplicationForm')}>
         <Text style={styles.btnTxt}>Go Back to Apply Loan</Text>
       </TouchableOpacity>
-   </ScrollView>      
       </View>
       </View>
     );
