@@ -14,7 +14,7 @@ class HomeScreen extends Component {
       <View style={styles.container} >
       <Text style={styles.headerTxt}>Welcome, { this.props.navigation.state.params.UserEmail }  </Text>
       <View style={styles.subView}>
-      <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('ApplyLoan')}>
+      <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('ApplyLoan', {UserEmail: this.props.navigation.state.params.UserEmail})}>
         <Text style={styles.btnTxt}>Apply Loan</Text>
         </TouchableOpacity>
       <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('LoanHistory')}>

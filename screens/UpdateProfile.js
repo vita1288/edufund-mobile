@@ -13,6 +13,7 @@ import {
   } from 'react-native';
   import React, { Component, setState } from 'react';
   import DatePicker from 'react-native-datepicker';
+
  
   
   export default class UpdateProfile extends Component {
@@ -70,6 +71,8 @@ import {
        this.GetVillage();
        this.GetProfile();
       }
+
+      
 
       GetProvince = () => {
         return fetch('http://192.168.0.18/edufund-api/Api/province.php')
@@ -292,6 +295,7 @@ import {
               placeholder="Id Card Number" 
               onChangeText={idcardnumber => this.setState ({idcardnumber})}
               value = {this.state.idcardnumber}
+              keyboardType="numeric"
               />
                 <TextInput style={styles.nameInput} 
               placeholder="Place of birth" 
@@ -401,7 +405,8 @@ import {
                <TextInput style={styles.nameInput} 
               placeholder="Proof Of Income" 
               onChangeText={ProofOfIncome => this.setState ({ProofOfIncome})}
-              value = {this.state.ProofOfIncome}/>
+              value = {this.state.ProofOfIncome}
+              keyboardType="numeric"/>
                <TextInput style={styles.nameInput} 
               placeholder="Proof Of Business" 
               onChangeText={ProofOfBusiness => this.setState ({ProofOfBusiness})}
@@ -409,7 +414,8 @@ import {
                 <TextInput style={styles.nameInput} 
               placeholder="Proof Of Business Income" 
               onChangeText={ProofOfBusinessIncome => this.setState ({ProofOfBusinessIncome})}
-              value = {this.state.ProofOfBusinessIncome}/>
+              value = {this.state.ProofOfBusinessIncome}
+              keyboardType="numeric"/>
                 <TextInput style={styles.nameInput} 
               placeholder="Type" 
               onChangeText={Type => this.setState ({Type})}
@@ -438,19 +444,23 @@ import {
                <TextInput style={styles.nameInput} 
               placeholder="Street" 
               onChangeText={Street => this.setState ({Street})}
-              value = {this.state.Street}/>
+              value = {this.state.Street}
+              />
               <TextInput style={styles.nameInput} 
               placeholder="Number" 
               onChangeText={Number => this.setState ({Number})}
-              value = {this.state.Number}/>
+              value = {this.state.Number}
+              keyboardType="numeric"/>
               <TextInput style={styles.nameInput} 
               placeholder="RT" 
               onChangeText={RT => this.setState ({RT})}
-              value = {this.state.RT}/>
+              value = {this.state.RT}
+              keyboardType="numeric"/>
               <TextInput style={styles.nameInput} 
               placeholder="RW" 
               onChangeText={RW => this.setState ({RW})}
-              value = {this.state.RW}/>
+              value = {this.state.RW}
+              keyboardType="numeric"/>
                <TextInput style={styles.nameInput} 
               placeholder="City" 
               onChangeText={City => this.setState ({City})}
@@ -458,11 +468,13 @@ import {
                <TextInput style={styles.nameInput} 
               placeholder="Sub District" 
               onChangeText={SubDistrict => this.setState ({SubDistrict})}
-              value = {this.state.SubDistrict}/>
+              value = {this.state.SubDistrict}
+              />
                <TextInput style={styles.nameInput} 
               placeholder="Postal Code" 
               onChangeText={PostalCode => this.setState ({PostalCode})}
-              value = {this.state.PostalCode}/>
+              value = {this.state.PostalCode}
+              keyboardType="numeric"/>
                <TextInput style={styles.nameInput} 
               placeholder="Residential Status" 
               onChangeText={ResidentialStatus => this.setState ({ResidentialStatus})}
@@ -470,7 +482,8 @@ import {
                <TextInput style={styles.nameInput} 
               placeholder="Duration" 
               onChangeText={Duration => this.setState ({Duration})}
-              value = {this.state.Duration}/>
+              value = {this.state.Duration}
+              keyboardType="numeric"/>
                <TextInput style={styles.nameInput} 
               placeholder="Proof Of Residence" 
               onChangeText={ProofOfResidence => this.setState ({ProofOfResidence})}
@@ -484,7 +497,8 @@ import {
                <TextInput style={styles.nameInput} 
               placeholder="Phone Emergency Contact" 
               onChangeText={Phone => this.setState ({Phone})}
-              value = {this.state.Phone}/>
+              value = {this.state.Phone}
+              keyboardType="numeric"/>
                <TextInput style={styles.nameInput} 
               placeholder="Relationship" 
               onChangeText={Relationship => this.setState ({Relationship})}

@@ -50,6 +50,7 @@ GetSimulation = async () => {
 
 
   render() {
+   
     return (
       <View style={styles.container}>
         <Text style={styles.headerTxt}>Loan Simulation</Text>
@@ -60,8 +61,8 @@ GetSimulation = async () => {
    <View style = {{backgroundColor:'#1E90FF',margin:15, justifyContent: 'center'}}>
    <ScrollView>
     <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Period time:    { this.props.navigation.state.params.periodtime}</Text>
-    <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Interest Per Month :  { this.props.navigation.state.params.interestpermonth}</Text>
-    <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Loan Amount Request:  Rp { this.props.navigation.state.params.loanamountrequest}</Text>
+    <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Interest Per Month :  { this.props.navigation.state.params.interestpermonth}%</Text>
+    <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Loan Amount Request: Rp { this.props.navigation.state.params.loanamountrequest}</Text>
     <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Total Loan Amount Request: Rp {this.state.totalloanamountrequest}</Text>
     <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Total Interest: Rp {this.state.totalinterest}</Text>
     <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Total Installment: Rp {this.state.totalinstallment}</Text>

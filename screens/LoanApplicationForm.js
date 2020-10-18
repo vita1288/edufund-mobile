@@ -17,10 +17,20 @@ import {
     constructor(props) {
       super(props);
       this.state = {
-        periodtime: '',
+        UserEmail : '',
+        product_id : '',
+        loan_status_id : '',
+        AgreementDate : '',
+        DisbursementDate : '',
+        periodtime: '', 
+        interest : '',
+        amount_without_interest : '',
         interestpermonth: '1.5',
         loanamountrequest: 1000000,
+        totalloanamountrequest : '',
         dppercent: '0.1',
+        LoanQuality : '',
+        LoanStatus : '',
         Reason : '',
         data: []
       }
@@ -29,6 +39,58 @@ import {
     componentDidMount() {
       //this.fetchdata();
     }
+
+    
+    
+  
+    SubmitLoan = () => 
+     {
+        let UserEmail = this.props.navigation.state.params.UserEmail;
+        const {interestpermonth} = this.state;
+        const {loanamountrequest} = this.state;
+        const { periodtime }  = this.state ;
+        const {totalloanamountrequest} = this.state.totalloanamountrequest;
+        const { Reason} = this.state;
+        fetch("http://192.168.0.18/edufund-api/Api/insertloan.php?",{
+          method: 'PUT',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+            body: JSON.stringify({
+              email : UserEmail,
+              product_id : "1",
+              loan_status_id : "1",
+              AgreementDate : "2020-10-19",
+              DisbursementDate : "2020-10-19",
+              periodtime : periodtime,
+              interest : interestpermonth,
+              amount_without_interest : loanamountrequest,
+              totalloanamountrequest : totalloanamountrequest,
+              DueAmount : loanamountrequest,
+              LoanQuality : "Good",
+              LoanStatus : "In Progress",
+              Reason : Reason
+       
+            })
+          })
+          .then((response) => response.json())
+          .then((responseJson) => {
+           console.log(responseJson.message);
+           if(responseJson.success === 1)
+            {
+              alert(responseJson.message)
+              this.props.navigation.navigate('HomeScreen');
+            }
+            else {
+              alert(responseJson.message)
+            }
+         
+             }).catch((error) => {
+               console.error(error);
+             });
+         }
+  
 
     SimulationFunction = async () => {
     const {periodtime} = this.state;
@@ -41,19 +103,22 @@ import {
       return;
     }
 
-    this.props.navigation.navigate('LoanSimulationSummary', { periodtime : periodtime, interestpermonth: interestpermonth, loanamountrequest: loanamountrequest, dppercent: dppercent })
+    this.props.navigation.navigate('LoanSimulationSummary', {  periodtime : periodtime, interestpermonth: interestpermonth, loanamountrequest: loanamountrequest, dppercent: dppercent })
     };
 
     
     change(loanamountrequest) {
       this.setState(() => {
         return {
-          loanamountrequest: parseFloat(loanamountrequest)
+          loanamountrequest: parseFloat(loanamountrequest).toFixed(2)
         };
       });
     }
+
+    
         render() 
         {
+          
           const {loanamountrequest} = this.state;
           return (
             <View style={styles.container}>
@@ -62,6 +127,7 @@ import {
             <Text style={styles.headerTxt}>Loan Application Form </Text>
             <View style={styles.subView}>
               <ScrollView>
+              <Text style={styles.subTxt}>Email: { this.props.navigation.state.params.UserEmail} </Text>
               <Text  style = {styles.subTxt}>Period Time</Text>
           <Picker
            style = {styles.subTxt}
@@ -129,8 +195,8 @@ import {
         onValueChange={this.change.bind(this)}
       />
               </View>
-              <Text style = {styles.subTxt}> Interest : {this.state.interestpermonth}</Text>
-              <Text style = {styles.subTxt}> DP : {this.state.dppercent}</Text>
+              <Text style = {styles.subTxt}> Interest : {this.state.interestpermonth}%</Text>
+              <Text style = {styles.subTxt}> DP : {this.state.dppercent}%</Text>
               <TextInput style={styles.nameInput} 
           placeholder="Reason for applying loan" 
           onChangeText={Reason => this.setState ({Reason}) }
@@ -139,7 +205,7 @@ import {
               <Text style={styles.btnTxt}>Simulation</Text>
             </TouchableOpacity>
 
-              <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('LoanApplicationForm')}>
+              <TouchableOpacity style={styles.btn} onPress={this.SubmitLoan}>
               <Text style={styles.btnTxt}>Submit Loan</Text>
             </TouchableOpacity>
            

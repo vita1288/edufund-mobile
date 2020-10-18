@@ -19,8 +19,6 @@ export default class ApplyLoan extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Product: '',
-      amount_without_interest : '',
       
     }
   }
@@ -33,7 +31,7 @@ export default class ApplyLoan extends Component {
             <Text style={styles.headerTxt}>Apply Loan </Text>
             <View style={styles.subView}>
               
-              <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('LoanApplicationForm')}>
+              <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('LoanApplicationForm', {UserEmail: this.props.navigation.state.params.UserEmail})}>
               <Text style={styles.btnTxt}>Loan Application Form</Text>
             </TouchableOpacity>
            
