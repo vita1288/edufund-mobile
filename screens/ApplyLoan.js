@@ -30,13 +30,14 @@ export default class ApplyLoan extends Component {
           <View style={styles.container}>
             <Text style={styles.headerTxt}>Apply Loan </Text>
             <View style={styles.subView}>
-              
               <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('LoanApplicationForm', {UserEmail: this.props.navigation.state.params.UserEmail})}>
               <Text style={styles.btnTxt}>Loan Application Form</Text>
             </TouchableOpacity>
-           
             <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('LoanSimulation')}>
               <Text style={styles.btnTxt}>Loan Simulation</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('LoanHistory',{UserEmail: this.props.navigation.state.params.UserEmail} )}>
+              <Text style={styles.btnTxt}>Loan History</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('HomeScreen')}>
               <Text style={styles.btnTxt}>Go Back to Home</Text>

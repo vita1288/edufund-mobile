@@ -17,7 +17,7 @@ class HomeScreen extends Component {
       <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('ApplyLoan', {UserEmail: this.props.navigation.state.params.UserEmail})}>
         <Text style={styles.btnTxt}>Apply Loan</Text>
         </TouchableOpacity>
-      <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('LoanHistory')}>
+      <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('LoanHistory',{UserEmail: this.props.navigation.state.params.UserEmail} )}>
         <Text style={styles.btnTxt}>View Loan History</Text>
       </TouchableOpacity>
      
@@ -62,6 +62,9 @@ class LoanReportScreen extends Component {
       <View style={styles.container}>
             <Text style={styles.headerTxt}>Loan Report </Text>
             <View style={styles.subView}>
+            <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('LoanReport', {UserEmail: this.props.navigation.state.params.UserEmail})}>
+        <Text style={styles.btnTxt}>Check Report</Text>
+        </TouchableOpacity>
             </View>
               </View>
     );

@@ -12,6 +12,7 @@ import {
   } from 'react-native';
   import React, { Component } from 'react';
   import Slider from 'react-native-slider';
+  import { HelperText } from 'react-native-paper';
  
   export default class LoanApplicationForm extends Component {
     constructor(props) {
@@ -51,7 +52,7 @@ import {
         const { periodtime }  = this.state ;
         const {totalloanamountrequest} = this.state.totalloanamountrequest;
         const { Reason} = this.state;
-        fetch("http://192.168.0.18/edufund-api/Api/insertloan.php?",{
+        fetch("http://192.168.0.17/edufund-api/Api/insertloan.php?",{
           method: 'PUT',
           headers: {
             'Accept': 'application/json',
@@ -82,7 +83,7 @@ import {
               alert(responseJson.message)
               this.props.navigation.navigate('HomeScreen');
             }
-            else {
+            else if(responseJson.success === 0) {
               alert(responseJson.message)
             }
          

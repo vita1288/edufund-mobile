@@ -33,7 +33,7 @@ export default class Login extends Component {
       return;
     }
 
-    var api = "http://192.168.0.18/edufund-api/Api/login.php?email=" + UserEmail + "&password=" + Password;
+    var api = "http://192.168.0.17/edufund-api/Api/login.php?email=" + UserEmail + "&password=" + Password;
     console.log(api);
     return fetch(api)
     .then((response) => response.json())

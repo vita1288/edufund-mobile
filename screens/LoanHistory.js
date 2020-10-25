@@ -5,18 +5,37 @@ import {
     StyleSheet,
     TextInput,
     TouchableOpacity,
-    Alert
+    Alert,
+    ScrollView
   } from 'react-native';
   import React, { Component } from 'react';
   
   
 export default class LoanHistory extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      UserEmail : '',
+    }
+  }
+
+  Process = async () => {
+    let UserEmail = this.props.navigation.state.params.UserEmail;
+    
+    
+    this.props.navigation.navigate('LoanHistorySummary', { UserEmail : UserEmail})
+  };
+
       render() 
       {
         return (
           <View style={styles.container}>
             <Text style={styles.headerTxt}>Loan History </Text>
             <View style={styles.subView}>
+            <Text style={styles.subTxt}>Email : {this.props.navigation.state.params.UserEmail}</Text>
+            <TouchableOpacity style={styles.btn} onPress={this.Process}>
+              <Text style={styles.btnTxt}>Check History</Text>
+            </TouchableOpacity>
             <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('HomeScreen')}>
               <Text style={styles.btnTxt}>Go Back to Home</Text>
             </TouchableOpacity>
@@ -51,7 +70,7 @@ export default class LoanHistory extends Component {
       subTxt: {
         color: 'black',
         marginTop: 20,
-        fontSize: 30,
+        fontSize: 20,
         fontWeight: 'bold',
         marginLeft: 40,
       },

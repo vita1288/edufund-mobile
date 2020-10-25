@@ -32,9 +32,8 @@ GetSimulation = async () => {
     let interestpermonth = this.props.navigation.state.params.interestpermonth;
     let loanamountrequest = this.props.navigation.state.params.loanamountrequest;
     let dppercent = this.props.navigation.state.params.dppercent;
-    const res = await fetch('http://192.168.0.18/edufund-api/Api/loansimulationfinal.php?periodtime=' + periodtime + '&interestpermonth=' + interestpermonth + '&loanamountrequest=' + loanamountrequest  + '&dppercent=' + dppercent);
+    const res = await fetch('http://192.168.0.17/edufund-api/Api/loansimulationfinal.php?periodtime=' + periodtime + '&interestpermonth=' + interestpermonth + '&loanamountrequest=' + loanamountrequest  + '&dppercent=' + dppercent);
     const resJson = await res.json();
-    console.log(resJson);
     this.setState({
         data : resJson,
         periodtime : resJson.periodtime,
@@ -58,7 +57,7 @@ GetSimulation = async () => {
       
           <Text style={styles.subTxt}>Loan Simulation Result</Text>
    
-   <View style = {{backgroundColor:'#1E90FF',margin:15, justifyContent: 'center'}}>
+          <View style = {{backgroundColor:'#1E90FF',margin:15, justifyContent: 'center' }}>
    <ScrollView>
     <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Period time:    { this.props.navigation.state.params.periodtime}</Text>
     <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Interest Per Month :  { this.props.navigation.state.params.interestpermonth}%</Text>

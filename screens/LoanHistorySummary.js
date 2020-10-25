@@ -6,7 +6,7 @@ import { FlatList } from 'react-native-gesture-handler';
 
 
 
-class Simulator extends Component {
+class LoanHistorySummary extends Component {
  
   constructor() { 
  
@@ -15,43 +15,67 @@ class Simulator extends Component {
     this.state = {
  
       isLoading: true,
-      Periodtime : '',
-      interestpermonth: '',
-      loanamountrequest: '',
+      UserEmail : '',
+      periodtime : '',
+      Balance : '',
+      PaidAmount : '',
+      totalamount : '',
+      dataSource : '',
       data: []
     };
   }
+
+
+  GetLoanBalance = async () =>
+  {
+    let UserEmail =  this.props.navigation.state.params.UserEmail;
+    const response = await fetch('http://192.168.0.17/edufund-api/Api/getloanbalance.php?email=' +  UserEmail);
+    const responseJson = await response.json();
+    this.setState({
+      dataSource : responseJson,
+      periodtime : responseJson.periodtime,
+      totalamount : responseJson.totalamount,
+      Balance : responseJson.Balance,
+      PaidAmount : responseJson.PaidAmount
+    });
+  }
+  
   componentDidMount() {
+    this.GetLoanBalance();
     this.fetchdata();
   }
 
   fetchdata = async () => {
-    let Periodtime =  this.props.navigation.state.params.Periodtime;
-    let interestpermonth = this.props.navigation.state.params.interestpermonth;
-    let loanamountrequest = this.props.navigation.state.params.loanamountrequest;
-    const response = await fetch('http://192.168.0.17/edufund-api/Api/loansimulation.php?periodtime=' +  Periodtime+ '&interestpermonth=' + interestpermonth + '&loanamountrequest=' + loanamountrequest);
+    let UserEmail =  this.props.navigation.state.params.UserEmail;
+    const response = await fetch('http://192.168.0.17/edufund-api/Api/loanhistory.php?email=' +  UserEmail);
     const responseJson = await response.json();
-    this.setState({data : responseJson});
+    this.setState({
+      data : responseJson
+    });
   };
 
 
   _renderItem = ({item}) => (
-    <View style = {{backgroundColor:'#1E90FF',margin:15, justifyContent: 'center', borderTopRightRadius: 40,
-        borderTopLeftRadius: 40, borderBottomEndRadius: 40, borderBottomLeftRadius: 40 }}>
-    <Text style = {{fontSize:20,margin:15, justifyContent: 'center' ,color:'white'}}> Number:    {item.No}</Text>
-    <Text style = {{fontSize:20,margin:15, justifyContent: 'center' ,color:'white'}}> Interest:  {item.interest}</Text>
-    <Text style = {{fontSize:20,margin:15, justifyContent: 'center' ,color:'white'}}> Balance:   {item.balance}</Text>
-    <Text style = {{fontSize:20,margin:15, justifyContent: 'center' ,color:'white'}}> Principal:  {item.principal}</Text>
-    <Text style = {{fontSize:20,margin:15, justifyContent: 'center' ,color:'white'}}> Installment: {item.Installment}</Text>
+    <View style = {{backgroundColor:'#1E90FF',margin:15, justifyContent: 'center', borderTopRightRadius: 15,
+        borderTopLeftRadius: 15, borderBottomEndRadius: 15, borderBottomLeftRadius: 15 }}>
+    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Monthly:  {item.Monthly}</Text>
+    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Amount:  {item.Amount}</Text>
+    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Due Date:   {item.DueDate}</Text>
+    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Status:  {item.Status}</Text>
     </View>
   );
 
   render() {
+      
     return (
       <View style={styles.container}>
-        <Text style={styles.headerTxt}>Loan Simulation</Text>
+        <Text style={styles.headerTxt}>Loan History</Text>
         <View style={styles.subView}>
-          <Text style={styles.subTxt}>Simulator</Text>
+          <Text style={styles.subTxt}>List History</Text>
+          <Text style={styles.subTxt}>Period time : {this.state.periodtime}</Text>
+          <Text style={styles.subTxt}>Total Amount: {this.state.totalamount}</Text>
+          <Text style={styles.subTxt}>Balance: {this.state.Balance}</Text>
+          <Text style={styles.subTxt}>Paid Amount: {this.state.PaidAmount}</Text>
 
 
   <FlatList
@@ -59,8 +83,8 @@ class Simulator extends Component {
    renderItem = {this._renderItem}
    keyExtractor = {(item, index) => index}
    />
-      <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('LoanSimulation')}>
-        <Text style={styles.btnTxt}>Go Back to Loan</Text>
+      <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('LoanHistory')}>
+        <Text style={styles.btnTxt}>Go Back to Loan History</Text>
       </TouchableOpacity>
         </View>  
       </View>
@@ -102,7 +126,7 @@ class Simulator extends Component {
     subTxt: {
       color: 'black',
       marginTop: 20,
-      fontSize: 30,
+      fontSize: 15,
       fontWeight: 'bold',
       marginLeft: 40,
     },
@@ -151,4 +175,4 @@ class Simulator extends Component {
 
 
    
-  export default Simulator;
+  export default LoanHistorySummary;

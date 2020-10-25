@@ -25,7 +25,7 @@ import {
       this.setState ({showError: this.state.UserEmail === ""})
       return;
     }
-    fetch("http://192.168.0.18/edufund-api/Api/forgotpassword.php",{
+    fetch("http://192.168.0.17/edufund-api/Api/forgotpassword.php",{
       method: 'POST',
       headers: {
         'Accept': 'application/json',

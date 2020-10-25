@@ -15,7 +15,9 @@ import Simulator from './screens/Simulator';
 import UpdateProfile from './screens/UpdateProfile';
 import { createAppContainer} from 'react-navigation';
 import LoanSimulationSummary from './screens/LoanSimulationSummary';
-
+import LoanReport from './screens/LoanReport';
+import LoanReportSummary from './screens/LoanReportSummary';
+import LoanHistorySummary from './screens/LoanHistorySummary';
 
 
 export default class App extends React.Component {
@@ -130,6 +132,27 @@ const RootNavigator = createStackNavigator({
   },
   LoanApplicationForm: {
     screen: LoanApplicationForm,
+    navigationOptions: {
+      headerShown: false,
+      headerTransparent: true,
+    },
+  },
+  LoanReport: {
+    screen: LoanReport,
+    navigationOptions: {
+      headerShown: false,
+      headerTransparent: true,
+    },
+  },
+  LoanReportSummary: {
+    screen: LoanReportSummary,
+    navigationOptions: {
+      headerShown: false,
+      headerTransparent: true,
+    },
+  },
+  LoanHistorySummary: {
+    screen: LoanHistorySummary,
     navigationOptions: {
       headerShown: false,
       headerTransparent: true,

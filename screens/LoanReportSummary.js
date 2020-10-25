@@ -6,7 +6,7 @@ import { FlatList } from 'react-native-gesture-handler';
 
 
 
-class Simulator extends Component {
+class LoanReportSummary extends Component {
  
   constructor() { 
  
@@ -15,9 +15,9 @@ class Simulator extends Component {
     this.state = {
  
       isLoading: true,
-      Periodtime : '',
-      interestpermonth: '',
-      loanamountrequest: '',
+      UserEmail : '',
+      startdate: '',
+      enddate: '',
       data: []
     };
   }
@@ -26,10 +26,10 @@ class Simulator extends Component {
   }
 
   fetchdata = async () => {
-    let Periodtime =  this.props.navigation.state.params.Periodtime;
-    let interestpermonth = this.props.navigation.state.params.interestpermonth;
-    let loanamountrequest = this.props.navigation.state.params.loanamountrequest;
-    const response = await fetch('http://192.168.0.17/edufund-api/Api/loansimulation.php?periodtime=' +  Periodtime+ '&interestpermonth=' + interestpermonth + '&loanamountrequest=' + loanamountrequest);
+    let UserEmail =  this.props.navigation.state.params.UserEmail;
+    let startdate = this.props.navigation.state.params.startdate;
+    let enddate = this.props.navigation.state.params.enddate;
+    const response = await fetch('http://192.168.0.17/edufund-api/Api/loanreport.php?email=' +  UserEmail+ '&startdate=' + startdate + '&enddate=' + enddate);
     const responseJson = await response.json();
     this.setState({data : responseJson});
   };
@@ -38,20 +38,22 @@ class Simulator extends Component {
   _renderItem = ({item}) => (
     <View style = {{backgroundColor:'#1E90FF',margin:15, justifyContent: 'center', borderTopRightRadius: 40,
         borderTopLeftRadius: 40, borderBottomEndRadius: 40, borderBottomLeftRadius: 40 }}>
-    <Text style = {{fontSize:20,margin:15, justifyContent: 'center' ,color:'white'}}> Number:    {item.No}</Text>
-    <Text style = {{fontSize:20,margin:15, justifyContent: 'center' ,color:'white'}}> Interest:  {item.interest}</Text>
-    <Text style = {{fontSize:20,margin:15, justifyContent: 'center' ,color:'white'}}> Balance:   {item.balance}</Text>
-    <Text style = {{fontSize:20,margin:15, justifyContent: 'center' ,color:'white'}}> Principal:  {item.principal}</Text>
-    <Text style = {{fontSize:20,margin:15, justifyContent: 'center' ,color:'white'}}> Installment: {item.Installment}</Text>
+    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Email:    {item.email}</Text>
+    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Loan ID:  {item.loan_id}</Text>
+    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Agreement Date:   {item.AgreementDate}</Text>
+    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Period Time:  {item.periodtime}</Text>
+    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Amount Without Interest: {item.amount_without_interest}</Text>
+    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Total Amount: {item.totalamount}</Text>
+    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Loan Status: {item.LoanStatus}</Text>
     </View>
   );
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.headerTxt}>Loan Simulation</Text>
+        <Text style={styles.headerTxt}>Loan Report</Text>
         <View style={styles.subView}>
-          <Text style={styles.subTxt}>Simulator</Text>
+          <Text style={styles.subTxt}>List Report</Text>
 
 
   <FlatList
@@ -59,8 +61,8 @@ class Simulator extends Component {
    renderItem = {this._renderItem}
    keyExtractor = {(item, index) => index}
    />
-      <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('LoanSimulation')}>
-        <Text style={styles.btnTxt}>Go Back to Loan</Text>
+      <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('LoanReport')}>
+        <Text style={styles.btnTxt}>Go Back to Loan Report</Text>
       </TouchableOpacity>
         </View>  
       </View>
@@ -151,4 +153,4 @@ class Simulator extends Component {
 
 
    
-  export default Simulator;
+  export default LoanReportSummary;

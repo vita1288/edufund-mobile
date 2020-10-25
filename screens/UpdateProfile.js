@@ -75,7 +75,7 @@ import {
       
 
       GetProvince = () => {
-        return fetch('http://192.168.0.18/edufund-api/Api/province.php')
+        return fetch('http://192.168.0.17/edufund-api/Api/province.php')
         .then((response) => response.json())
         .then((responseJson) => {
           this.setState({
@@ -91,7 +91,7 @@ import {
       }
 
       GetVillage = () => {
-        return fetch('http://192.168.0.18/edufund-api/Api/village.php')
+        return fetch('http://192.168.0.17/edufund-api/Api/village.php')
         .then((response) => response.json())
         .then((responseJson) => {
           this.setState({
@@ -110,7 +110,7 @@ import {
 
       GetProfile = () => {
         let UserEmail = this.props.navigation.state.params.UserEmail;
-        var api = "http://192.168.0.18/edufund-api/Api/getprofileaccountbyemail.php?email=" +UserEmail;
+        var api = "http://192.168.0.17/edufund-api/Api/getprofileaccountbyemail.php?email=" +UserEmail;
         console.log(api);
         return fetch(api)
         .then((response) => response.json())
@@ -208,7 +208,7 @@ import {
 
      
 
-        fetch("http://192.168.0.18/edufund-api/Api/profile.php?",{
+        fetch("http://192.168.0.17/edufund-api/Api/profile.php?",{
           method: 'PUT',
           headers: {
             'Accept': 'application/json',
