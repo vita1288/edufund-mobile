@@ -32,7 +32,7 @@ GetSimulation = async () => {
     let interestpermonth = this.props.navigation.state.params.interestpermonth;
     let loanamountrequest = this.props.navigation.state.params.loanamountrequest;
     let dppercent = this.props.navigation.state.params.dppercent;
-    const res = await fetch('http://192.168.0.17/edufund-api/Api/loansimulationfinal.php?periodtime=' + periodtime + '&interestpermonth=' + interestpermonth + '&loanamountrequest=' + loanamountrequest  + '&dppercent=' + dppercent);
+    const res = await fetch('http://192.168.0.20/edufund-api/Api/loansimulationfinal.php?periodtime=' + periodtime + '&interestpermonth=' + interestpermonth + '&loanamountrequest=' + loanamountrequest  + '&dppercent=' + dppercent);
     const resJson = await res.json();
     this.setState({
         data : resJson,

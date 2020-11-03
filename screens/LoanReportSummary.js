@@ -29,7 +29,7 @@ class LoanReportSummary extends Component {
     let UserEmail =  this.props.navigation.state.params.UserEmail;
     let startdate = this.props.navigation.state.params.startdate;
     let enddate = this.props.navigation.state.params.enddate;
-    const response = await fetch('http://192.168.0.17/edufund-api/Api/loanreport.php?email=' +  UserEmail+ '&startdate=' + startdate + '&enddate=' + enddate);
+    const response = await fetch('http://192.168.0.20/edufund-api/Api/loanreport.php?email=' +  UserEmail+ '&startdate=' + startdate + '&enddate=' + enddate);
     const responseJson = await response.json();
     this.setState({data : responseJson});
   };

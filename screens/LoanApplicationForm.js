@@ -52,7 +52,7 @@ import {
         const { periodtime }  = this.state ;
         const {totalloanamountrequest} = this.state.totalloanamountrequest;
         const { Reason} = this.state;
-        fetch("http://192.168.0.17/edufund-api/Api/insertloan.php?",{
+        fetch("http://192.168.0.20/edufund-api/Api/insertloan.php?",{
           method: 'PUT',
           headers: {
             'Accept': 'application/json',
@@ -62,15 +62,15 @@ import {
               email : UserEmail,
               product_id : "1",
               loan_status_id : "1",
-              AgreementDate : "2020-10-19",
-              DisbursementDate : "2020-10-19",
+              AgreementDate : "2020-10-31",
+              DisbursementDate : "2020-10-31",
               periodtime : periodtime,
               interest : interestpermonth,
               amount_without_interest : loanamountrequest,
               totalloanamountrequest : totalloanamountrequest,
               DueAmount : loanamountrequest,
               LoanQuality : "Good",
-              LoanStatus : "In Progress",
+              LoanStatus : "In Process",
               Reason : Reason
        
             })

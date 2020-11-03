@@ -29,7 +29,7 @@ class LoanHistorySummary extends Component {
   GetLoanBalance = async () =>
   {
     let UserEmail =  this.props.navigation.state.params.UserEmail;
-    const response = await fetch('http://192.168.0.17/edufund-api/Api/getloanbalance.php?email=' +  UserEmail);
+    const response = await fetch('http://192.168.0.20/edufund-api/Api/getloanbalance.php?email=' +  UserEmail);
     const responseJson = await response.json();
     this.setState({
       dataSource : responseJson,
@@ -47,7 +47,7 @@ class LoanHistorySummary extends Component {
 
   fetchdata = async () => {
     let UserEmail =  this.props.navigation.state.params.UserEmail;
-    const response = await fetch('http://192.168.0.17/edufund-api/Api/loanhistory.php?email=' +  UserEmail);
+    const response = await fetch('http://192.168.0.20/edufund-api/Api/loanhistory.php?email=' +  UserEmail);
     const responseJson = await response.json();
     this.setState({
       data : responseJson
@@ -126,7 +126,7 @@ class LoanHistorySummary extends Component {
     subTxt: {
       color: 'black',
       marginTop: 20,
-      fontSize: 15,
+      fontSize: 13,
       fontWeight: 'bold',
       marginLeft: 40,
     },

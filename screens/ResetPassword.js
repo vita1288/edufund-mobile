@@ -29,7 +29,7 @@ export default class ResetPassword extends Component {
           this.setState ({showError: this.state.Password === ""})
           return;
         }
-        fetch("http://192.168.0.17/edufund-api/Api/reset_password.php",{
+        fetch("http://192.168.0.20/edufund-api/Api/reset_password.php",{
             method: 'POST',
             headers: {
               'Accept': 'application/json',

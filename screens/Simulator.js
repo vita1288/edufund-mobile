@@ -29,7 +29,7 @@ class Simulator extends Component {
     let Periodtime =  this.props.navigation.state.params.Periodtime;
     let interestpermonth = this.props.navigation.state.params.interestpermonth;
     let loanamountrequest = this.props.navigation.state.params.loanamountrequest;
-    const response = await fetch('http://192.168.0.17/edufund-api/Api/loansimulation.php?periodtime=' +  Periodtime+ '&interestpermonth=' + interestpermonth + '&loanamountrequest=' + loanamountrequest);
+    const response = await fetch('http://192.168.0.20/edufund-api/Api/loansimulation.php?periodtime=' +  Periodtime+ '&interestpermonth=' + interestpermonth + '&loanamountrequest=' + loanamountrequest);
     const responseJson = await response.json();
     this.setState({data : responseJson});
   };

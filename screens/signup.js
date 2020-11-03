@@ -39,7 +39,7 @@ export default class Signup extends Component {
 
 
 
-    fetch("http://192.168.0.17/edufund-api/Api/signup.php",{
+    fetch("http://192.168.0.20/edufund-api/Api/signup.php",{
       method: 'POST',
       headers: {
         'Accept': 'application/json',

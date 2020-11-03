@@ -10,9 +10,13 @@ import {
     Picker,
     ActivityIndicator,
     Button,
+    Image
   } from 'react-native';
   import React, { Component, setState } from 'react';
   import DatePicker from 'react-native-datepicker';
+  import * as ImagePicker from 'expo-image-picker';
+  import * as Permissions from 'expo-permissions';
+
 
  
   
@@ -60,12 +64,139 @@ import {
           dataSource : [],
           data : [],
           isLoading : true,
+          uploading : false,
           
         }
       }
      
-      
+
+      _pickImage = async () => {
+        await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        const { cancelled, uri } = await ImagePicker.launchImageLibraryAsync({
+          allowsEditing: true,
+          aspect: [4, 4],
+          base64: true
+        });
+        if (!cancelled) {
+          this.setState({ ImageKTP: uri }, () => {
+            this.createFormData(uri);
+          });
+        }
+      };
+ 
+      _pickImage2 = async () => {
+        await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        const { cancelled, uri } = await ImagePicker.launchImageLibraryAsync({
+          allowsEditing: true,
+          aspect: [4, 4],
+          base64: true
+        });
+        if (!cancelled) {
+          this.setState({ ImageSelfie: uri }, () => {
+            this.createFormData2(uri);
+          });
+        }
+      };
+
+       _pickImage3 = async () => {
+        await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        const { cancelled, uri } = await ImagePicker.launchImageLibraryAsync({
+          allowsEditing: true,
+          aspect: [4, 4],
+          base64: true
+        });
+        if (!cancelled) {
+          this.setState({ ImageFamilyMemberCard: uri }, () => {
+            this.createFormData3(uri);
+          });
+        }
+      };
    
+    
+      
+      createFormData = async (uri) =>  {
+        const {ImageKTP} = this.state;
+        if(!ImageKTP) return;
+        let apiUrl = 'http://192.168.0.20/edufund-api/Api/uploading.php';
+        let uriParts = uri.split('.');
+        let fileType = uriParts[uriParts.length - 1];
+
+  let formData = new FormData();
+  formData.append('ImageKTP', {
+    uri,
+    name: `ImageKTP.${fileType}`,
+    type: `image/${fileType}`,
+  });
+
+  let options = {
+    method: 'POST',
+    body: formData,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'multipart/form-data',
+      
+    },
+  };
+
+  return fetch(apiUrl, options);
+}
+        
+        
+      createFormData2 = async (uri) =>  {
+        const {ImageSelfie} = this.state;
+        if(!ImageSelfie) return;
+        let apiUrl = 'http://192.168.0.20/edufund-api/Api/uploading2.php';
+        let uriParts = uri.split('.');
+        let fileType = uriParts[uriParts.length - 1];
+
+  let formData = new FormData();
+  formData.append('ImageSelfie', {
+    uri,
+    name: `ImageSelfie.${fileType}`,
+    type: `image/${fileType}`,
+  });
+
+  let options = {
+    method: 'POST',
+    body: formData,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'multipart/form-data',
+      
+    },
+  };
+
+  return fetch(apiUrl, options);
+}
+
+      createFormData3 = async (uri) =>  {
+        const {ImageFamilyMemberCard} = this.state;
+        if(!ImageFamilyMemberCard) return;
+        let apiUrl = 'http://192.168.0.20/edufund-api/Api/uploading3.php';
+       let uriParts = uri.split('.');
+       let fileType = uriParts[uriParts.length - 1];
+
+  let formData = new FormData();
+  formData.append('ImageFamilyMemberCard', {
+    uri,
+    name: `ImageFamilyMemberCard.${fileType}`,
+    type: `image/${fileType}`,
+  });
+
+  let options = {
+    method: 'POST',
+    body: formData,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'multipart/form-data',
+    },
+  };
+
+  return fetch(apiUrl, options);
+}
+
+     
+
       componentDidMount = () => {
        this.GetProvince();
        this.GetVillage();
@@ -75,7 +206,7 @@ import {
       
 
       GetProvince = () => {
-        return fetch('http://192.168.0.17/edufund-api/Api/province.php')
+        return fetch('http://192.168.0.20/edufund-api/Api/province.php')
         .then((response) => response.json())
         .then((responseJson) => {
           this.setState({
@@ -91,7 +222,7 @@ import {
       }
 
       GetVillage = () => {
-        return fetch('http://192.168.0.17/edufund-api/Api/village.php')
+        return fetch('http://192.168.0.20/edufund-api/Api/village.php')
         .then((response) => response.json())
         .then((responseJson) => {
           this.setState({
@@ -110,7 +241,7 @@ import {
 
       GetProfile = () => {
         let UserEmail = this.props.navigation.state.params.UserEmail;
-        var api = "http://192.168.0.17/edufund-api/Api/getprofileaccountbyemail.php?email=" +UserEmail;
+        var api = "http://192.168.0.20/edufund-api/Api/getprofileaccountbyemail.php?email=" +UserEmail;
         console.log(api);
         return fetch(api)
         .then((response) => response.json())
@@ -206,14 +337,15 @@ import {
         const {Phone} = this.state;
         const {Relationship} = this.state;
 
-     
+        
 
-        fetch("http://192.168.0.17/edufund-api/Api/profile.php?",{
+        fetch("http://192.168.0.20/edufund-api/Api/profile.php?",{
           method: 'PUT',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
+
           body: JSON.stringify({
             email  : UserEmail,
             idcardnumber : idcardnumber,
@@ -278,6 +410,9 @@ import {
        
       render() 
       {
+        const {ImageKTP} = this.state;
+        const {ImageSelfie} = this.state;
+        const {ImageFamilyMemberCard} = this.state;
         if (this.state.isLoading) {
           return (
             <View style={{flex: 1, paddingTop: 20}}>
@@ -346,14 +481,18 @@ import {
           <Picker.Item label="Hindu" value= "Hindu" />
           <Picker.Item label="Buddha" value= "Buddha" />
           </Picker>
-              <TextInput style={styles.nameInput} 
-              placeholder="ImageKTP" 
-              onChangeText={ImageKTP => this.setState ({ImageKTP})}
-              value = {this.state.ImageKTP}/>
-              <TextInput style={styles.nameInput} 
-              placeholder="ImageSelfie" 
-              onChangeText={ImageSelfie => this.setState ({ImageSelfie})}
-              value = {this.state.ImageSelfie}/>
+          <Button
+          onPress={this._pickImage}
+          title="Upload Image KTP"
+        />
+        <Image source={{uri:this.state.ImageKTP ? ImageKTP : null}} style={{ width: 200, height: 200 }} />
+         <Button
+          onPress={this._pickImage2}
+          title="Upload Image Selfie"
+        />
+        <Image source={{uri:this.state.ImageSelfie ? ImageSelfie : null}}  style={{ width: 200, height: 200 }} />
+        
+
               <Text  style = {styles.subTxt}>Status Marriage</Text>
                <Picker
                 style = {styles.subTxt}
@@ -378,10 +517,11 @@ import {
               placeholder="Tax ID" 
               onChangeText={TaxID => this.setState ({TaxID})}
               value = {this.state.TaxID}/>
-              <TextInput style={styles.nameInput} 
-              placeholder="ImageFamilyMemberCard" 
-              onChangeText={ImageFamilyMemberCard => this.setState ({ImageFamilyMemberCard})}
-              value = {this.state.ImageFamilyMemberCard}/>
+              <Button
+          onPress={this._pickImage3}
+          title="Upload Image Family Member Card"
+        />
+         <Image source={{uri:this.state.ImageFamilyMemberCard ? ImageFamilyMemberCard : null}}  style={{ width: 200, height: 200 }} />
               <TextInput style={styles.nameInput} 
               placeholder="Occupation" 
               onChangeText={Occupation => this.setState ({Occupation})}
