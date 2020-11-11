@@ -6,6 +6,7 @@ import {
     TouchableOpacity,
     Alert,
     FlatList,
+    ScrollView,
   } from 'react-native';
   import React, { Component } from 'react';
   import { HelperText } from 'react-native-paper';
@@ -56,21 +57,26 @@ import {
         <View style={styles.container}>
           <Text style={styles.headerTxt}>Loan Simulation Fund</Text>
           <View style={styles.subView}>
+
+            <ScrollView>
             <Text style={styles.subTxt}>Simulation</Text>
-              <TextInput style={styles.nameInput} 
+            <TextInput style={styles.nameInput} 
               placeholder="Period Time" 
               onChangeText={Periodtime => this.setState ({Periodtime})}
+              keyboardType="numeric"
               >
               </TextInput>
               <HelperText type="error" visible={this.state.showError}>
         Period Time cannot be empty!
       </HelperText>
               <TextInput style={styles.nameInput} placeholder="Interest" onChangeText={(interestpermonth => { this.setState({ interestpermonth }) })}
+               keyboardType="numeric"
               />
               <HelperText type="error" visible={this.state.showError}>
         Interest cannot be empty!
       </HelperText>
               <TextInput style={styles.nameInput} placeholder="Loan Amount Request" onChangeText={(loanamountrequest => { this.setState({ loanamountrequest }) })}
+               keyboardType="numeric"
               />
                <HelperText type="error" visible={this.state.showError}>
         Loan Amount Request cannot be empty!
@@ -78,6 +84,12 @@ import {
               <TouchableOpacity style={styles.btn} onPress={this.SimulationFunction}>
                 <Text style={styles.btnTxt}>Check Simulation</Text>
               </TouchableOpacity>
+
+              <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('HomeScreen')}>
+        <Text style={styles.btnTxt}>Go Back to Home</Text>
+      </TouchableOpacity>
+            </ScrollView>
+             
 
           </View>
         </View>
@@ -92,13 +104,13 @@ import {
     },
     subView: {
       backgroundColor: 'white',
-      height: 430,
+      height: 400,
       marginTop: 240,
       borderTopRightRadius: 40,
       borderTopLeftRadius: 40,
     },
     headerTxt: {
-      fontSize: 40,
+      fontSize: 25,
       marginLeft: 40,
       fontWeight: 'bold',
       color: 'white',
@@ -108,9 +120,13 @@ import {
     subTxt: {
       color: 'black',
       marginTop: 20,
-      fontSize: 30,
+      fontSize: 15,
       fontWeight: 'bold',
       marginLeft: 40,
+    },
+    text: {
+      fontSize: 15,
+      textAlign: 'center'
     },
     nameInput: {
       height: 40,
@@ -145,12 +161,17 @@ import {
       fontWeight: 'bold',
     },
     endBtn: {
-      marginLeft: 120,
-      justifyContent: 'space-between',
+      marginRight: 80,
     },
     loginTxt: {
-      fontSize: 15,
+      fontSize: 20,
       fontWeight: 'bold',
       marginTop: 24,
     },
+    TextComponentStyle: {
+      fontSize: 20,
+       color: "#000",
+       textAlign: 'center', 
+       marginBottom: 15
+      },
   });

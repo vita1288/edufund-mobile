@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   subTxt: {
     color: 'black',
     marginTop: 20,
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: 'bold',
     marginLeft: 40,
   },

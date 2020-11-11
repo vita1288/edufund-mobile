@@ -1,15 +1,62 @@
 import React, {Component} from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, BackHandler, DeviceEventEmitter, Alert } from 'react-native';
 import {  createAppContainer } from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import { Ionicons } from 'react-native-vector-icons';
+
 
 
 class HomeScreen extends Component {
   static navigationOptions = {
     title: 'Home',
   };
+  
+  constructor(props) {
+    super(props)
+    this.backPressSubscriptions = new Set();
+    alert = '';
+  }
+
+  componentDidMount = () => {
+    DeviceEventEmitter.removeAllListeners('hardwareBackPress')
+    DeviceEventEmitter.addListener('hardwareBackPress', () => {
+      let invokeDefault = true
+      const subscriptions = []
+
+      this.backPressSubscriptions.forEach(sub => subscriptions.push(sub))
+
+      for (let i = 0; i < subscriptions.reverse().length; i += 1) {
+        if (subscriptions[i]()) {
+          invokeDefault = false
+          break
+        }
+      }
+
+      if (invokeDefault) {
+        Alert.alert('Hold on!', 'Are you sure you want to exit?', [
+          {
+            text: 'Cancel',
+            onPress: () => null,
+            style: 'cancel',
+          },
+          { text: 'YES', onPress: () => BackHandler.exitApp() },
+        ]);
+        return true;
+      }
+    })
+
+    this.backPressSubscriptions.add(this.handleHardwareBack)
+  }
+
+  componentWillUnmount = () => {
+    DeviceEventEmitter.removeAllListeners('hardwareBackPress')
+    this.backPressSubscriptions.clear()
+  }
+
+  handleHardwareBack = () => { /* do your thing */ }
+
   render() {
+    
     return (
       <View style={styles.container} >
       <Text style={styles.headerTxt}>Welcome, { this.props.navigation.state.params.UserEmail }  </Text>

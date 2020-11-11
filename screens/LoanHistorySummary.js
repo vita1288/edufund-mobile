@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
  
-import { SectionList, StyleSheet, View, Alert, TextInput, Button, Text, Platform, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { SectionList, StyleSheet, View, Alert, TextInput, Button, Text, Platform, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
  
 import { FlatList } from 'react-native-gesture-handler';
 
@@ -59,8 +59,11 @@ class LoanHistorySummary extends Component {
     <View style = {{backgroundColor:'#1E90FF',margin:15, justifyContent: 'center', borderTopRightRadius: 15,
         borderTopLeftRadius: 15, borderBottomEndRadius: 15, borderBottomLeftRadius: 15 }}>
     <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Monthly:  {item.Monthly}</Text>
+    <Text style = {{height: 2, backgroundColor: 'white'}}></Text>
     <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Amount:  {item.Amount}</Text>
+    <Text style = {{height: 2, backgroundColor: 'white'}}></Text>
     <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Due Date:   {item.DueDate}</Text>
+    <Text style = {{height: 2, backgroundColor: 'white'}}></Text>
     <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Status:  {item.Status}</Text>
     </View>
   );
@@ -71,11 +74,14 @@ class LoanHistorySummary extends Component {
       <View style={styles.container}>
         <Text style={styles.headerTxt}>Loan History</Text>
         <View style={styles.subView}>
+          <ScrollView>
           <Text style={styles.subTxt}>List History</Text>
           <Text style={styles.subTxt}>Period time : {this.state.periodtime}</Text>
           <Text style={styles.subTxt}>Total Amount: {this.state.totalamount}</Text>
           <Text style={styles.subTxt}>Balance: {this.state.Balance}</Text>
           <Text style={styles.subTxt}>Paid Amount: {this.state.PaidAmount}</Text>
+          </ScrollView>
+         
 
 
   <FlatList
@@ -116,7 +122,7 @@ class LoanHistorySummary extends Component {
       borderTopLeftRadius: 40,
     },
     headerTxt: {
-      fontSize: 40,
+      fontSize: 25,
       marginLeft: 40,
       fontWeight: 'bold',
       color: 'white',

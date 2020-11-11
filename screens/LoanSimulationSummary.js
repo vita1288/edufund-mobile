@@ -57,15 +57,22 @@ GetSimulation = async () => {
       
           <Text style={styles.subTxt}>Loan Simulation Result</Text>
    
-          <View style = {{backgroundColor:'#1E90FF',margin:15, justifyContent: 'center' }}>
+          <View style = {{backgroundColor:'#1E90FF',margin:15, justifyContent: 'center', borderTopRightRadius: 40,
+        borderTopLeftRadius: 40, borderBottomEndRadius: 40, borderBottomLeftRadius: 40 }}>
    <ScrollView>
-    <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Period time:    { this.props.navigation.state.params.periodtime}</Text>
-    <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Interest Per Month :  { this.props.navigation.state.params.interestpermonth}%</Text>
-    <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Loan Amount Request: Rp { this.props.navigation.state.params.loanamountrequest}</Text>
-    <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Total Loan Amount Request: Rp {this.state.totalloanamountrequest}</Text>
-    <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Total Interest: Rp {this.state.totalinterest}</Text>
-    <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> Total Installment: Rp {this.state.totalinstallment}</Text>
-    <Text style = {{fontSize:17,margin:5, justifyContent: 'center' ,color:'white'}}> DP: Rp {this.state.dp}</Text>
+    <Text style = {{fontSize:15,margin:8, justifyContent: 'center' ,color:'white'}}> Period time:    { this.props.navigation.state.params.periodtime}</Text>
+    <Text style = {{height: 2, backgroundColor: 'white'}}></Text>
+    <Text style = {{fontSize:15,margin:8, justifyContent: 'center' ,color:'white'}}> Interest Per Month :  { this.props.navigation.state.params.interestpermonth}%</Text>
+    <Text style = {{height: 2, backgroundColor: 'white'}}></Text>
+    <Text style = {{fontSize:15,margin:8, justifyContent: 'center' ,color:'white'}}> Loan Amount Request: Rp { this.props.navigation.state.params.loanamountrequest}</Text>
+    <Text style = {{height: 2, backgroundColor: 'white'}}></Text>
+    <Text style = {{fontSize:15,margin:8, justifyContent: 'center' ,color:'white'}}> Total Loan Amount Request: Rp {this.state.totalloanamountrequest}</Text>
+    <Text style = {{height: 2, backgroundColor: 'white'}}></Text>
+    <Text style = {{fontSize:15,margin:8, justifyContent: 'center' ,color:'white'}}> Total Interest: Rp {this.state.totalinterest}</Text>
+    <Text style = {{height: 2, backgroundColor: 'white'}}></Text>
+    <Text style = {{fontSize:15,margin:8, justifyContent: 'center' ,color:'white'}}> Total Installment: Rp {this.state.totalinstallment}</Text>
+    <Text style = {{height: 2, backgroundColor: 'white'}}></Text>
+    <Text style = {{fontSize:15,margin:8, justifyContent: 'center' ,color:'white'}}> DP: Rp {this.state.dp}</Text>
     
     </ScrollView>   
       </View>  
@@ -102,7 +109,7 @@ GetSimulation = async () => {
       borderTopLeftRadius: 40,
     },
     headerTxt: {
-      fontSize: 40,
+      fontSize: 25,
       marginLeft: 40,
       fontWeight: 'bold',
       color: 'white',

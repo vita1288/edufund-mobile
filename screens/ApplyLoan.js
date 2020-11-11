@@ -94,7 +94,7 @@ export default class ApplyLoan extends Component {
       btnTxt: {
         color: 'white',
         fontWeight: 'bold',
-        fontSize: 15,
+        fontSize: 20,
       },
       endView: {
         flexDirection: 'row',
@@ -114,10 +114,4 @@ export default class ApplyLoan extends Component {
         fontWeight: 'bold',
         marginTop: 24,
       },
-      TextComponentStyle: {
-          fontSize: 20,
-         color: "#000",
-         textAlign: 'center', 
-         marginBottom: 15
-        }
     });

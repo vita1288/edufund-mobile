@@ -39,11 +39,17 @@ class LoanReportSummary extends Component {
     <View style = {{backgroundColor:'#1E90FF',margin:15, justifyContent: 'center', borderTopRightRadius: 40,
         borderTopLeftRadius: 40, borderBottomEndRadius: 40, borderBottomLeftRadius: 40 }}>
     <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Email:    {item.email}</Text>
+    <Text style = {{height: 2, backgroundColor: 'white'}}></Text>
     <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Loan ID:  {item.loan_id}</Text>
+    <Text style = {{height: 2, backgroundColor: 'white'}}></Text>
     <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Agreement Date:   {item.AgreementDate}</Text>
+    <Text style = {{height: 2, backgroundColor: 'white'}}></Text>
     <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Period Time:  {item.periodtime}</Text>
+    <Text style = {{height: 2, backgroundColor: 'white'}}></Text>
     <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Amount Without Interest: {item.amount_without_interest}</Text>
+    <Text style = {{height: 2, backgroundColor: 'white'}}></Text>
     <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Total Amount: {item.totalamount}</Text>
+    <Text style = {{height: 2, backgroundColor: 'white'}}></Text>
     <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Loan Status: {item.LoanStatus}</Text>
     </View>
   );
@@ -94,7 +100,7 @@ class LoanReportSummary extends Component {
       borderTopLeftRadius: 40,
     },
     headerTxt: {
-      fontSize: 40,
+      fontSize: 25,
       marginLeft: 40,
       fontWeight: 'bold',
       color: 'white',

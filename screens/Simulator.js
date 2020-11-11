@@ -38,11 +38,16 @@ class Simulator extends Component {
   _renderItem = ({item}) => (
     <View style = {{backgroundColor:'#1E90FF',margin:15, justifyContent: 'center', borderTopRightRadius: 40,
         borderTopLeftRadius: 40, borderBottomEndRadius: 40, borderBottomLeftRadius: 40 }}>
-    <Text style = {{fontSize:20,margin:15, justifyContent: 'center' ,color:'white'}}> Number:    {item.No}</Text>
-    <Text style = {{fontSize:20,margin:15, justifyContent: 'center' ,color:'white'}}> Interest:  {item.interest}</Text>
-    <Text style = {{fontSize:20,margin:15, justifyContent: 'center' ,color:'white'}}> Balance:   {item.balance}</Text>
-    <Text style = {{fontSize:20,margin:15, justifyContent: 'center' ,color:'white'}}> Principal:  {item.principal}</Text>
-    <Text style = {{fontSize:20,margin:15, justifyContent: 'center' ,color:'white'}}> Installment: {item.Installment}</Text>
+    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white',}}> Number:    {item.No}</Text>
+    <Text style = {{height: 2, backgroundColor: 'white'}}></Text>
+    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Interest:  {item.interest}</Text>
+    <Text style = {{height: 2, backgroundColor: 'white'}}></Text>
+    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Balance:   {item.balance}</Text>
+    <Text style = {{height: 2, backgroundColor: 'white'}}></Text>
+    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Principal:  {item.principal}</Text>
+    <Text style = {{height: 2, backgroundColor: 'white'}}></Text>
+    <Text style = {{fontSize:15,margin:15, justifyContent: 'center' ,color:'white'}}> Installment: {item.Installment}</Text>
+    <Text style = {{height: 2, backgroundColor: 'white'}}></Text>
     </View>
   );
 
@@ -52,7 +57,7 @@ class Simulator extends Component {
         <Text style={styles.headerTxt}>Loan Simulation</Text>
         <View style={styles.subView}>
           <Text style={styles.subTxt}>Simulator</Text>
-
+        
 
   <FlatList
    data={this.state.data}
@@ -92,7 +97,7 @@ class Simulator extends Component {
       borderTopLeftRadius: 40,
     },
     headerTxt: {
-      fontSize: 40,
+      fontSize: 25,
       marginLeft: 40,
       fontWeight: 'bold',
       color: 'white',
@@ -102,7 +107,7 @@ class Simulator extends Component {
     subTxt: {
       color: 'black',
       marginTop: 20,
-      fontSize: 30,
+      fontSize: 25,
       fontWeight: 'bold',
       marginLeft: 40,
     },

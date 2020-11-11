@@ -98,7 +98,7 @@ import {
       borderTopLeftRadius: 40,
     },
     headerTxt: {
-      fontSize: 40,
+      fontSize: 25,
       marginLeft: 40,
       fontWeight: 'bold',
       color: 'white',
@@ -108,7 +108,7 @@ import {
     subTxt: {
       color: 'black',
       marginTop: 20,
-      fontSize: 30,
+      fontSize: 20,
       fontWeight: 'bold',
       marginLeft: 40,
     },
