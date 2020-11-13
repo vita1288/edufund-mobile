@@ -401,12 +401,12 @@ return fetch(apiUrl, options);
         .then((responseJson) => {
          if(responseJson.success === 1)
           {
-            alert(responseJson.message)
+            alert(responseJson.message);
             this.props.navigation.navigate('HomeScreen')
           
           }
           else{
-            alert(responseJson.message)
+            alert(responseJson.message);
           }
        
            }).catch((error) => {
@@ -491,14 +491,12 @@ return fetch(apiUrl, options);
           onPress={this._pickImage}
           title="Browse Image KTP"
         />
-         <Image source={{uri: "http://192.168.0.20/edufund-api/Api/uploads/ImageKTP.jpeg"}}  style={{ width: 200, height: 200 }} />
        {this.state.ImageKTP  ? <Image source={{uri: this.state.ImageKTP}}  style={{ width: 200, height: 200 }} /> : null }
       
          <Button
           onPress={this._pickImage2}
           title="Browse Image Selfie"
         />
-        <Image source={{uri: "http://192.168.0.20/edufund-api/Api/uploads/ImageSelfie.jpeg"}}  style={{ width: 200, height: 200 }} />
          {this.state.ImageSelfie ? <Image source={{uri: this.state.ImageSelfie}} style={{ width: 200, height: 200 }} /> : null }
          
               <Text  style = {styles.subTxt}>Status Marriage</Text>
@@ -529,7 +527,6 @@ return fetch(apiUrl, options);
           onPress={this._pickImage3}
           title="Browse Image Family Member Card"
         />
-        <Image source={{uri: "http://192.168.0.20/edufund-api/Api/uploads/ImageFamilyMemberCard.jpeg"}}  style={{ width: 200, height: 200 }} />
           {this.state.ImageFamilyMemberCard ? <Image source={{uri: this.state.ImageFamilyMemberCard}} style={{ width: 200, height: 200 }} /> : null }
           
               <TextInput style={styles.nameInput} 
